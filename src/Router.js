@@ -15,18 +15,18 @@ import Studio from './pages/Studio';
 const Router = () => {
     return (
         <BrowserRouter>
-            <Center>
-                <Sidebar />
-                <Routes>
-                    <Route path="/main" element={<Main />} />
-                    <Route path="/shortForm" element={<ShortForm />} />
-                    <Route path="/lesson" element={<Lesson />} />
-                    <Route path="/craft" element={<Craft />} />
-                    <Route path="/prologue" element={<Prologue />} />
-                    <Route path="/suggestion" element={<Suggestion />} />
-                    <Route path="/studio" element={<Studio />} />
-                </Routes>
-            </Center>
+            {/* <Center> */}
+            <Sidebar />
+            <Routes>
+                <Route path="/main" element={<Main />} />
+                <Route path="/shortForm" element={<ShortForm />} />
+                <Route path="/lesson" element={<Lesson />} />
+                <Route path="/craft" element={<Craft />} />
+                <Route path="/prologue" element={<Prologue />} />
+                <Route path="/suggestion" element={<Suggestion />} />
+                <Route path="/studio" element={<Studio />} />
+            </Routes>
+            {/* </Center> */}
         </BrowserRouter>
     );
 };
