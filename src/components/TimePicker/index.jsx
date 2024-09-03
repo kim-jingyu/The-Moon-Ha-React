@@ -1,5 +1,5 @@
 import React from 'react';
-import { GlobalStyle, StyledRangePicker } from './styled';
+import { StyledRangePicker } from './styled';
 import { ConfigProvider } from 'antd';
 import { colors } from '../../styles/colors';
 

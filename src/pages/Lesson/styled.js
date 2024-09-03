@@ -31,5 +31,6 @@ export const BodyWrapper = styled.div`
     justify-content: center;
     width: 90%;
     height: auto;
+    box-sizing: border-box;
     margin-top: 22px;
 `;

@@ -9,6 +9,7 @@ export const StyledRangePicker = styled(RangePicker)`
         border-color: ${colors.bright_gray};
         input {
             height: 30px;
+            width: 120px;
             font-size: 12px;
             border-radius: 10px;
             padding: 8px;

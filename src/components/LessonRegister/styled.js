@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     margin-top: 22px;
     margin-bottom: 22px;
+    gap: 5px;
     padding: 22px;
     width: 100%;
     height: auto;
@@ -29,12 +30,15 @@ export const Wrapper = styled.div`
 export const RowWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin: 5px;
+    gap: 40px;
     // background-color: ${colors.main_green};
 `;
 
 export const RowItem = styled.div`
-    margin-right: 25px;
+    gap: 15px;
+    width: auto;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -43,9 +47,10 @@ export const RowItem = styled.div`
 export const HintTitle = styled.p`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
-    margin-right: 15px;
     font-size: 12px;
+    width: auto;
     align-items: center;
+    // background-color: ${colors.drak_gray};
     color: ${colors.black};
 `;
 
