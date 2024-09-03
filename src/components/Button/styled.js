@@ -11,9 +11,28 @@ const buttonStyles = {
         border-radius: 5px;
         cursor: pointer;
         text-align: center;
-        font-weight: bold;
         border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Happiness-Sans', sans-serif;
+        font-weight: 800;
+    `,
+    lessonRegisterBtn: css`
+        width: 200px;
+        height: 50px;
+        background-color: ${colors.white};
+        color: ${colors.black};
+        font-size: 12px;
+        border-radius: 5px;
+        cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+        text-align: center;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Happiness-Sans', sans-serif;
+        font-weight: 800;
+
+        &:hover {
+            background-color: ${({ disabled }) => (disabled ? colors.white : colors.main_green)};
+        }
     `,
 };
 

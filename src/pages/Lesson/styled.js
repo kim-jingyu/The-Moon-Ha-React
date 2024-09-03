@@ -5,7 +5,7 @@ import '../../styles/font.css';
 
 export const Container = styled.div`
     width: 90vw;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,5 +23,13 @@ export const TitleWrapper = styled.div`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
     font-size: 20pt;
-    // background-color: ${colors.drak_gray};
+`;
+
+export const BodyWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: auto;
+    margin-top: 22px;
 `;
