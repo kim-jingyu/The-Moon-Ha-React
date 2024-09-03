@@ -3,7 +3,13 @@ import { StyledRangePicker } from './styled';
 import { ConfigProvider } from 'antd';
 import { colors } from '../../styles/colors';
 
-const TimePicker = () => {
+const TimePicker = ({ onChange }) => {
+    const handleTimeChange = (times, timeStrings) => {
+        if (onChange) {
+            onChange(times, timeStrings);
+        }
+    };
+
     return (
         <ConfigProvider
             theme={{
@@ -21,6 +27,7 @@ const TimePicker = () => {
                 disabledHours={disabledHours} // 비활성화할 시간 설정
                 disabledMinutes={disabledMinutes} // 비활성화할 분 설정
                 hideDisabledOptions={true}
+                onChange={handleTimeChange}
             />
         </ConfigProvider>
     );

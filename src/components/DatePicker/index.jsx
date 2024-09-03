@@ -3,7 +3,13 @@ import { ConfigProvider, Space } from 'antd';
 import { StyledRangePicker } from './styled';
 import { colors } from '../../styles/colors';
 
-const DatePicker = () => {
+const DatePicker = ({ onChange }) => {
+    const handleDateChange = (dates, dateStrings) => {
+        if (onChange) {
+            onChange(dates, dateStrings);
+        }
+    };
+
     return (
         <ConfigProvider
             theme={{
@@ -14,18 +20,7 @@ const DatePicker = () => {
             }}
         >
             <Space direction="vertical" size={12}>
-                <StyledRangePicker
-                    id={{
-                        start: 'startInput',
-                        end: 'endInput',
-                    }}
-                    onFocus={(_, info) => {
-                        console.log('Focus:', info.range);
-                    }}
-                    onBlur={(_, info) => {
-                        console.log('Blur:', info.range);
-                    }}
-                />
+                <StyledRangePicker onChange={handleDateChange} />
             </Space>
         </ConfigProvider>
     );

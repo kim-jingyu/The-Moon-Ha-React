@@ -19,8 +19,8 @@ const buttonStyles = {
     lessonRegisterBtn: css`
         width: 200px;
         height: 50px;
-        background-color: ${colors.white};
-        color: ${colors.black};
+        background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
+        color: ${({ disabled }) => (disabled ? colors.drak_gray : colors.white)};
         font-size: 12px;
         border-radius: 5px;
         cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -31,7 +31,7 @@ const buttonStyles = {
         font-weight: 800;
 
         &:hover {
-            background-color: ${({ disabled }) => (disabled ? colors.white : colors.main_green)};
+            background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
         }
     `,
 };
