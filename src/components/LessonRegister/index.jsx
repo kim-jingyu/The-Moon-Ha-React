@@ -17,6 +17,7 @@ import TimePicker from '../TimePicker';
 import DatePicker from '../DatePicker';
 import { DropdownWithGroup, branchItem } from '../DropdownWithGroup';
 import { category_center, category_ch1985, Dropdown } from '../Dropdown';
+import { LessonRegisterAPI } from '../../apis/Lesson';
 
 const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
 const target = ['성인', '엄마랑 아이랑', '유아/어린이', '패밀리'];
@@ -24,6 +25,7 @@ const target = ['성인', '엄마랑 아이랑', '유아/어린이', '패밀리'
 const LessonRegister = () => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedBranch, setSelectedBranch] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [category, setCategory] = useState([]);
     const [teacherName, setTeacherName] = useState('');
     const [isRealTime, setIsRealTime] = useState(false);
@@ -32,32 +34,110 @@ const LessonRegister = () => {
     const [selectedWeekDay, setSelectedWeekDay] = useState('');
     const [selectedTarget, setSelectedTarget] = useState('');
     const [lessonFee, setLessonFee] = useState(0);
+    const [summary, setSummary] = useState('');
+    const [supply, setSupply] = useState('');
     const [curriculum, setCurriculumName] = React.useState([]);
-    const [selectedDays, setSelectedDays] = React.useState([]);
-
-    const handleCheckboxChange = (day) => {
-        setSelectedDays((prevSelectedDays) =>
-            prevSelectedDays.includes(day) ? prevSelectedDays.filter((d) => d !== day) : [...prevSelectedDays, day],
-        );
-    };
+    const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+    const [selectedTimeRange, setSelectedTimeRange] = useState(null);
 
     const handleRadioTargetChange = (event) => {
         setSelectedTarget(event.target.value);
+    };
+
+    const handleDateChange = (dates, dateStrings) => {
+        setSelectedDateRange(dates);
+        console.log('Selected Dates:', dates);
+        console.log('Selected Date Strings:', dateStrings);
+    };
+
+    const handleTimeChange = (times, timeStrings) => {
+        setSelectedTimeRange(times);
+        console.log('Selected Time : {} ', times);
+        console.log('Selected Time : {} ', timeStrings);
     };
 
     const handleRadioWeekDayChange = (event) => {
         setSelectedWeekDay(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!isDisabled) {
-            // 서버로 데이터를 전송하는 로직을 여기에 작성
-            console.log('Form submitted');
+            // 서버로 데이터 전송
+            const lessonRegister = {
+                branchId: selectedBranch?.index || null,
+                categoryId: 1,
+                memberId: 2,
+                title: lessonName,
+                startDate: selectedDateRange ? selectedDateRange[0].format('YYYY-MM-DD') : null,
+                endDate: selectedDateRange ? selectedDateRange[1].format('YYYY-MM-DD') : null,
+                startTime: selectedTimeRange ? selectedTimeRange[0].format('HH:mm') : null,
+                endTime: selectedTimeRange ? selectedTimeRange[1].format('HH:mm') : null,
+                summary: summary,
+                cnt: 0,
+                cost: lessonFee,
+                curriculum: curriculum,
+                supply: supply,
+                place: place,
+                day: selectedWeekDay,
+                target: 1,
+                onlineCost: isRealTime ? lessonFee * 0.8 : 0,
+            };
+
+            try {
+                // API 호출
+                console.info('lessonRegister : {}', lessonRegister);
+                const response = await LessonRegisterAPI(lessonRegister);
+                console.log('응답 : {}', response);
+                if (response.status === 200) {
+                    console.log('Success:', response.data);
+                } else {
+                    console.error('Server Error:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error.response ? error.response.data : error.messageror);
+            }
         }
     };
 
     useEffect(() => {
-        // selectedBranch 값에 따라 dropdownGroups를 업데이트
+        // 모든 상태가 null이 아니고 빈 문자열이 아닌지 확인
+        if (
+            selectedBranch !== null &&
+            selectedCategory !== null &&
+            teacherName !== '' &&
+            lessonName !== '' &&
+            place !== '' &&
+            selectedWeekDay !== '' &&
+            selectedTarget !== '' &&
+            lessonFee !== 0 &&
+            summary !== '' &&
+            selectedDateRange !== null &&
+            selectedTimeRange !== null &&
+            curriculum.length > 0 // 배열의 길이가 0이 아닌지 확인
+        ) {
+            console.log('활성화!!~');
+            setIsDisabled(false);
+        } else {
+            setIsDisabled(true);
+        }
+    }, [
+        selectedBranch,
+        selectedCategory,
+        teacherName,
+        lessonName,
+        place,
+        selectedWeekDay,
+        selectedTarget,
+        lessonFee,
+        summary,
+        supply,
+        selectedDateRange,
+        selectedTimeRange,
+        curriculum,
+    ]);
+
+    useEffect(() => {
+        // selectedBranch 값에 따라 카테고리 dropdown 업데이트
         if (selectedBranch) {
             const foundBranch = branchItem.find((branch) =>
                 branch.items.some((item) => item.name === selectedBranch.name),
@@ -122,7 +202,7 @@ const LessonRegister = () => {
                     </RowItem>
                     <RowItem>
                         <HintTitle>카테고리</HintTitle>
-                        <Dropdown title="카테고리명" group={category} onSelect={setCategory} />
+                        <Dropdown title="카테고리명" group={category} onSelect={setSelectedCategory} />
                     </RowItem>
                 </RowWrapper>
                 <RowWrapper>
@@ -160,11 +240,11 @@ const LessonRegister = () => {
                 <RowWrapper>
                     <RowItem>
                         <HintTitle>기간</HintTitle>
-                        <DatePicker />
+                        <DatePicker onChange={handleDateChange} />
                     </RowItem>
                     <RowItem>
                         <HintTitle>수업 시간</HintTitle>
-                        <TimePicker />
+                        <TimePicker onChange={handleTimeChange} />
                     </RowItem>
                 </RowWrapper>
 
@@ -205,8 +285,8 @@ const LessonRegister = () => {
                             width="450px"
                             height="90px"
                             placeholder="개요"
-                            value={teacherName}
-                            onChange={(e) => setTeacherName(e.target.value)}
+                            value={summary}
+                            onChange={(e) => setSummary(e.target.value)}
                         />
                     </RowItem>
                     <RowItem>
@@ -216,8 +296,8 @@ const LessonRegister = () => {
                             width="200px"
                             height="90px"
                             placeholder="준비물"
-                            value={teacherName}
-                            onChange={(e) => setTeacherName(e.target.value)}
+                            value={supply}
+                            onChange={(e) => setSupply(e.target.value)}
                         />
                     </RowItem>
                 </RowWrapper>
