@@ -3,22 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import { Container, HintTitle, InputField, RowItem, BodyWrapper, ContentWrapper, ContentItem } from './styled';
 import { StyledButton } from '../Button/styled';
 import { DropdownWithGroup, branchItem } from '../DropdownWithGroup';
-import { LessonRegisterAPI } from '../../apis/Lesson';
+import { ShoreFormRegisterAPI } from '../../apis/Lesson';
 import FileUpload from '../Upload';
 import WeekPicker from '../WeekPicker';
+import dayjs from 'dayjs';
 
 const ShortFormRegister = () => {
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedBranch, setSelectedBranch] = useState(null);
     // // const [category, setCategory] = useState([]);
-    const [startDate, setStartDate] = useState([]);
-    const [expireDate, setExpireDate] = useState([]);
+    const [startDate, setStartDate] = useState(null);
+    const [expireDate, setExpireDate] = useState(null);
     const [teacherName, setTeacherName] = useState('');
     const [lessonName, setLessonName] = useState('');
     const [videoFile, setVideoFile] = useState(null);
 
-    const handleWeekChange = (startDate, endDate) => {
+    const handleWeekChange = (startDateString, endDateString) => {
+        const startDateDayjs = dayjs(startDateString);
+        const endDateDayjs = dayjs(endDateString);
+
+        // YYYY-MM-DDTHH:mm:ss 형식으로 변환
+        const formattedStartDate = startDateDayjs.format('YYYY-MM-DDTHH:mm:ss');
+        const formattedEndDate = endDateDayjs.format('YYYY-MM-DDTHH:mm:ss');
+
+        // Date 객체로 변환
+        const startDate = new Date(formattedStartDate);
+        const endDate = new Date(formattedEndDate);
+
+        // 상태 설정
         setStartDate(startDate);
         setExpireDate(endDate);
         console.log('startDate:', startDate);
@@ -33,22 +46,22 @@ const ShortFormRegister = () => {
     const handleSubmit = async () => {
         if (!isDisabled) {
             // 서버로 데이터 전송
-            const lessonRegister = {
+            const shortFormRegister = {
                 lessonId: 56,
                 name: teacherName,
-                startDate: startDate ? startDate.format('YYYY-MM-DDTHH:mm:ss') : null,
-                expireDate: expireDate ? expireDate.format('YYYY-MM-DDTHH:mm:ss') : null,
+                startDate: startDate,
+                expireDate: expireDate,
             };
-            console.log('lessonRegister.startDate : ', lessonRegister.startDate);
-            console.log('lessonRegister.expireDate : ', lessonRegister.expireDate);
+            console.log('lessonRegister.startDate : ', shortFormRegister.startDate);
+            console.log('lessonRegister.expireDate : ', shortFormRegister.expireDate);
             try {
                 // API 호출
                 console.log('videoFile : {}', videoFile);
-                const response = await LessonRegisterAPI(lessonRegister, videoFile);
+                const response = await ShoreFormRegisterAPI(shortFormRegister, videoFile);
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
                     console.log('Success:', response.data);
-                    navigate('/lesson');
+                    navigate('/shortForm');
                 } else {
                     console.error('Server Error:', response.status, response.statusText);
                 }
