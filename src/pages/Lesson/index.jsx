@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BodyWrapper, Container, TitleWrapper } from './styled';
 import TabMenu from '../../components/TabMenu';
 import { StyledButton } from '../../components/Button/styled';
@@ -12,10 +13,12 @@ const PastRecords = () => <div>과거 내역 화면</div>;
 const AddPage = () => <LessonRegister />;
 
 const Lesson = () => {
+    const navigate = useNavigate();
     const [activeIndex, setActiveIndex] = useState(0);
     const [currentPage, setCurrentPage] = useState('default'); // 현재 페이지 상태
+
     const handleOnclick = () => {
-        setCurrentPage('add');
+        navigate('/lesson/register');
     };
 
     const handleTabClick = (index) => {

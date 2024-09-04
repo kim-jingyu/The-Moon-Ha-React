@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Image } from 'antd';
 import {
     Container,
@@ -27,6 +28,7 @@ const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
 const target = ['성인', '엄마랑 아이랑', '유아/어린이', '패밀리'];
 
 const LessonRegister = () => {
+    const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -108,6 +110,7 @@ const LessonRegister = () => {
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
                     console.log('Success:', response.data);
+                    navigate('/lesson');
                 } else {
                     console.error('Server Error:', response.status, response.statusText);
                 }

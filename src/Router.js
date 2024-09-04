@@ -11,6 +11,7 @@ import Craft from './pages/Craft';
 import Prologue from './pages/Prologue';
 import Suggestion from './pages/Suggestion';
 import Studio from './pages/Studio';
+import LessonRegisterPage from './pages/LessonRegister';
 
 const Router = () => {
     return (
@@ -21,6 +22,7 @@ const Router = () => {
                 <Route path="/main" element={<Main />} />
                 <Route path="/shortForm" element={<ShortForm />} />
                 <Route path="/lesson" element={<Lesson />} />
+                <Route path="/lesson/register" element={<LessonRegisterPage />} />
                 <Route path="/craft" element={<Craft />} />
                 <Route path="/prologue" element={<Prologue />} />
                 <Route path="/suggestion" element={<Suggestion />} />
