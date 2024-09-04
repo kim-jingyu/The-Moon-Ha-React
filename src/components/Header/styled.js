@@ -10,6 +10,7 @@ export const Container = styled.div`
     padding-left: 20px;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
+    background-color: ${colors.side_bar};
 `;
 
 export const LogoImage = styled.img`
@@ -20,6 +21,7 @@ export const LogoImage = styled.img`
 export const LeftWrapper = styled.div`
     display: flex;
     margin: 10px;
+    color: ${colors.white};
     align-items: center;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */

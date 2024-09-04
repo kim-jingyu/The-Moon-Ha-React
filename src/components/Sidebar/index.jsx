@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from './styled';
 
-import shortFormIcon from '../../assets/images/shortFormIcon.svg';
-import lessonIcon from '../../assets/images/lessonIcon.svg';
-import craftIcon from '../../assets/images/craftIcon.svg';
-import analysticIcon from '../../assets/images/analysticIcon.svg';
-import studioIcon from '../../assets/images/studioIcon.svg';
+import shortFormIcon from '../../assets/images/shortFormIcon_w.svg';
+import lessonIcon from '../../assets/images/lessonIcon_w.svg';
+import craftIcon from '../../assets/images/craftIcon_w.svg';
+import analysticIcon from '../../assets/images/analysticIcon_w.svg';
+import studioIcon from '../../assets/images/studioIcon_w.svg';
 import SidebarButton from '../SidebarButton';
 
 const menus = [

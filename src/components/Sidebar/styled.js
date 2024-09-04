@@ -8,7 +8,7 @@ export const Container = styled.div`
     list-style: none;
     transition: all 0.5s ease;
     padding-top: 30px;
-    background-color: ${colors.white};
+    background-color: ${colors.side_bar};
 `;
 
 export const SidebarWrapper = styled.div`
