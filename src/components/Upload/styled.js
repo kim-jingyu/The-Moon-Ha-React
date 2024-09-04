@@ -4,8 +4,8 @@ import '../../styles/font.css';
 
 export const FileUploadContainer = styled.div`
     display: flex;
-    width: 380px;
-    height: 210px;
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
     align-items: center;
     justify-content: center;
     box-sizing: board-box;

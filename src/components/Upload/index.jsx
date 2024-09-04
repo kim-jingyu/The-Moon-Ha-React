@@ -3,7 +3,7 @@ import { message, Upload, Image, Modal, Button } from 'antd';
 import styled from 'styled-components';
 import { FileUploadContainer, PreviewFile, PreviewImg, ProfileImgInput, ProfileImgLabel } from './styled';
 
-const FileUpload = ({ onChange, id }) => {
+const FileUpload = ({ onChange, id, width = '380px', height = '210px' }) => {
     const acceptType = id === 'image' ? 'image/*' : id === 'video' ? 'video/*' : '';
 
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -19,9 +19,9 @@ const FileUpload = ({ onChange, id }) => {
     };
 
     return (
-        <FileUploadContainer>
+        <FileUploadContainer width={width} height={height}>
             {previewUrl ? (
-                <PreviewFile src={previewUrl} alt="미리보기" />
+                <PreviewFile src={previewUrl} alt="미리보기" style={{ width, height }} />
             ) : (
                 <ProfileImgLabel htmlFor={id}>파일 업로드</ProfileImgLabel>
             )}

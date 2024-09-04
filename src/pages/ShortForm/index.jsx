@@ -15,7 +15,7 @@ const ShortForm = () => {
     const [currentPage, setCurrentPage] = useState('default'); // 현재 페이지 상태
 
     const handleOnclick = () => {
-        navigate('/lesson/register');
+        navigate('/shortForm/register');
     };
 
     const handleTabClick = (index) => {
@@ -52,7 +52,9 @@ const ShortForm = () => {
         <Container>
             <TitleWrapper>
                 숏폼 관리
-                <StyledButton variant="addBtn">추가</StyledButton>
+                <StyledButton variant="addBtn" onClick={handleOnclick}>
+                    추가
+                </StyledButton>
             </TitleWrapper>
             <TabMenu tabItems={shortFormTabItems} activeIndex={activeIndex} onTabClick={handleTabClick} />
             <BodyWrapper>{renderContent()}</BodyWrapper>
