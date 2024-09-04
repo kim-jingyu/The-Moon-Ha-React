@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Image } from 'antd';
 import {
     Container,
     HintTitle,
@@ -11,6 +12,8 @@ import {
     RadioContainer,
     RadioInput,
     RadioLabel,
+    UploadWrapper,
+    UploadItem,
 } from './styled';
 import { StyledButton } from '../Button/styled';
 import TimePicker from '../TimePicker';
@@ -18,6 +21,7 @@ import DatePicker from '../DatePicker';
 import { DropdownWithGroup, branchItem } from '../DropdownWithGroup';
 import { category_center, category_ch1985, Dropdown } from '../Dropdown';
 import { LessonRegisterAPI } from '../../apis/Lesson';
+import FileUpload from '../Upload';
 
 const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
 const target = ['성인', '엄마랑 아이랑', '유아/어린이', '패밀리'];
@@ -39,6 +43,8 @@ const LessonRegister = () => {
     const [curriculum, setCurriculumName] = React.useState([]);
     const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
     const [selectedTimeRange, setSelectedTimeRange] = useState(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
+    const [videoFile, setVideoFile] = useState(null);
 
     const handleRadioTargetChange = (event) => {
         setSelectedTarget(event.target.value);
@@ -58,6 +64,16 @@ const LessonRegister = () => {
 
     const handleRadioWeekDayChange = (event) => {
         setSelectedWeekDay(event.target.value);
+    };
+
+    const handleThumbnailFileChange = (file) => {
+        console.log('Thumbnail file:', file);
+        setThumbnailFile(file);
+    };
+
+    const handleVideoFileChange = (file) => {
+        console.log('Video file:', file);
+        setVideoFile(file);
     };
 
     const handleSubmit = async () => {
@@ -86,7 +102,9 @@ const LessonRegister = () => {
             try {
                 // API 호출
                 console.info('lessonRegister : {}', lessonRegister);
-                const response = await LessonRegisterAPI(lessonRegister);
+                console.log('thumbnailFile : {}', thumbnailFile);
+                console.log('videoFile : {}', videoFile);
+                const response = await LessonRegisterAPI(lessonRegister, thumbnailFile, videoFile);
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
                     console.log('Success:', response.data);
@@ -94,7 +112,12 @@ const LessonRegister = () => {
                     console.error('Server Error:', response.status, response.statusText);
                 }
             } catch (error) {
-                console.error('Error submitting form:', error.response ? error.response.data : error.messageror);
+                if (error.response) {
+                    console.error('서버 응답 에러 데이터:', error.response.data);
+                    console.error('서버 응답 상태:', error.response.status);
+                } else {
+                    console.error('요청 에러:', error.message);
+                }
             }
         }
     };
@@ -113,6 +136,8 @@ const LessonRegister = () => {
             summary !== '' &&
             selectedDateRange !== null &&
             selectedTimeRange !== null &&
+            thumbnailFile !== null &&
+            videoFile !== null &&
             curriculum.length > 0 // 배열의 길이가 0이 아닌지 확인
         ) {
             console.log('활성화!!~');
@@ -133,6 +158,8 @@ const LessonRegister = () => {
         supply,
         selectedDateRange,
         selectedTimeRange,
+        thumbnailFile,
+        videoFile,
         curriculum,
     ]);
 
@@ -176,7 +203,8 @@ const LessonRegister = () => {
                         <HintTitle>강사명</HintTitle>
                         <InputField
                             type="text"
-                            placeholder="강사명"
+                            width="240px"
+                            // placeholder="강사명"
                             value={teacherName}
                             onChange={(e) => setTeacherName(e.target.value)}
                         />
@@ -194,7 +222,7 @@ const LessonRegister = () => {
                         <HintTitle>강좌명</HintTitle>
                         <InputField
                             type="text"
-                            placeholder="강좌명"
+                            // placeholder="강좌명"
                             width="430px"
                             value={lessonName}
                             onChange={(e) => setLessonName(e.target.value)}
@@ -210,7 +238,7 @@ const LessonRegister = () => {
                         <HintTitle>장소</HintTitle>
                         <InputField
                             type="text"
-                            placeholder="장소"
+                            // placeholder="장소"
                             width="300px"
                             value={place}
                             onChange={(e) => setPlace(e.target.value)}
@@ -247,7 +275,6 @@ const LessonRegister = () => {
                         <TimePicker onChange={handleTimeChange} />
                     </RowItem>
                 </RowWrapper>
-
                 <RowWrapper>
                     <RowItem>
                         <HintTitle>요일 선택</HintTitle>
@@ -270,21 +297,22 @@ const LessonRegister = () => {
                         <HintTitle>수강료</HintTitle>
                         <InputField
                             type="text"
-                            placeholder="수강료"
-                            width="200px"
+                            // placeholder="수강료"
+                            width="220px"
                             value={lessonFee}
                             onChange={(e) => setLessonFee(e.target.value)}
                         />
                     </RowItem>
                 </RowWrapper>
+            </Wrapper>
+            <Wrapper>
                 <RowWrapper>
                     <RowItem>
                         <HintTitle>개요</HintTitle>
                         <InputField
                             type="text"
                             width="450px"
-                            height="90px"
-                            placeholder="개요"
+                            // placeholder="개요"
                             value={summary}
                             onChange={(e) => setSummary(e.target.value)}
                         />
@@ -293,9 +321,8 @@ const LessonRegister = () => {
                         <HintTitle>준비물</HintTitle>
                         <InputField
                             type="text"
-                            width="200px"
-                            height="90px"
-                            placeholder="준비물"
+                            width="220px"
+                            // placeholder="준비물"
                             value={supply}
                             onChange={(e) => setSupply(e.target.value)}
                         />
@@ -306,7 +333,7 @@ const LessonRegister = () => {
                         <HintTitle>커리큘럼</HintTitle>
                         <InputField
                             type="text"
-                            placeholder="커리큘럼"
+                            // placeholder="커리큘럼"
                             width="745px"
                             height="90px"
                             value={curriculum}
@@ -317,9 +344,16 @@ const LessonRegister = () => {
             </Wrapper>
 
             <Wrapper>
-                <RowWrapper>
-                    <HintTitle>썸네일 사진</HintTitle>
-                </RowWrapper>
+                <UploadWrapper>
+                    <UploadItem>
+                        <HintTitle>썸네일 사진</HintTitle>
+                        <FileUpload onChange={handleThumbnailFileChange} id="image" />
+                    </UploadItem>
+                    <UploadItem>
+                        <HintTitle>프리뷰 영상</HintTitle>
+                        <FileUpload onChange={handleVideoFileChange} id="video" />
+                    </UploadItem>
+                </UploadWrapper>
             </Wrapper>
 
             <StyledButton variant="lessonRegisterBtn" onClick={handleSubmit} disabled={isDisabled}>

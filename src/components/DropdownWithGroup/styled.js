@@ -22,10 +22,10 @@ export const DropdownButton = styled.button`
     background-color: ${colors.white};
     color: ${colors.drak_gray};
     font-weight: 400; /* Bold */
-    width: 220px;
+    width: 240px;
     height: 35px;
     box-sizing: border-box;
-    border: 1px solid ${colors.bright_gray};
+    border: 1px solid ${colors.gray};
     padding: 10px 15px;
     font-size: 12px;
     cursor: pointer;

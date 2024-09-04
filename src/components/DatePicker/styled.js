@@ -6,10 +6,10 @@ const { RangePicker } = DatePicker;
 
 export const StyledRangePicker = styled(RangePicker)`
     .ant-picker-input {
-        border-color: ${colors.bright_gray};
+        border-color: ${colors.gray};
         input {
             height: 30px;
-            width: 120px;
+            width: 130px;
             font-size: 12px;
             border-radius: 10px;
             padding: 8px;
@@ -22,10 +22,10 @@ export const StyledRangePicker = styled(RangePicker)`
     }
 
     .ant-picker-range-separator {
-        color: ${colors.bright_gray};
+        color: ${colors.gray};
     }
 
     &:hover {
-        border-color: ${colors.bright_gray}; /* Custom border color on hover */
+        border-color: ${colors.gray}; /* Custom border color on hover */
     }
 `;

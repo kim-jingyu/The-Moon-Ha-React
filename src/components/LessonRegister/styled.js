@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 22px;
+    // margin-top: 22px;
     margin-bottom: 22px;
     gap: 5px;
     padding: 22px;
@@ -32,7 +32,15 @@ export const RowWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin: 5px;
-    gap: 40px;
+    // background-color: ${colors.main_green};
+`;
+
+export const UploadWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+    gap: 5px;
     // background-color: ${colors.main_green};
 `;
 
@@ -44,13 +52,18 @@ export const RowItem = styled.div`
     flex-direction: row;
 `;
 
+export const UploadItem = styled.div`
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+`;
+
 export const HintTitle = styled.p`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
     font-size: 12px;
     width: auto;
     align-items: center;
-    // background-color: ${colors.drak_gray};
     color: ${colors.black};
 `;
 
@@ -59,7 +72,7 @@ export const InputField = styled.input`
     height: ${(props) => props.height || '35px'};
     box-sizing: border-box;
     padding: 10px;
-    border: 1px solid ${colors.bright_gray};
+    border: 1px solid ${colors.gray};
     border-radius: 5px;
     font-size: 12px;
     font-family: 'Happiness-Sans', sans-serif;

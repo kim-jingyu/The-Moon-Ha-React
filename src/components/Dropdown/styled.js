@@ -25,7 +25,7 @@ export const DropdownButton = styled.button`
     width: 220px;
     height: 35px;
     box-sizing: border-box;
-    border: 1px solid ${colors.bright_gray};
+    border: 1px solid ${colors.gray};
     padding: 10px 15px;
     font-size: 12px;
     cursor: pointer;

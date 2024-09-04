@@ -7,7 +7,7 @@ const { RangePicker } = TimePicker;
 
 export const StyledRangePicker = styled(RangePicker)`
     .ant-picker-input {
-        border-color: ${colors.bright_gray};
+        border-color: ${colors.gray};
         input {
             height: 30px;
             width: 120px;
@@ -23,10 +23,10 @@ export const StyledRangePicker = styled(RangePicker)`
     }
 
     .ant-picker-range-separator {
-        color: ${colors.bright_gray};
+        color: ${colors.gray};
     }
 
     &:hover {
-        border-color: ${colors.bright_gray}; /* Custom border color on hover */
+        border-color: ${colors.gray}; /* Custom border color on hover */
     }
 `;
