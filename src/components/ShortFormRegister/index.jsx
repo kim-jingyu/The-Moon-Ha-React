@@ -66,7 +66,7 @@ const ShortFormRegister = () => {
                 // API 호출
                 console.log('videoFile : {}', videoFile);
                 console.log('thumbnailFile : {}', thumbnailFile);
-                const response = await ShoreFormRegisterAPI(shortFormRegister, videoFile);
+                const response = await ShoreFormRegisterAPI(shortFormRegister, thumbnailFile, videoFile);
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
                     console.log('Success:', response.data);
@@ -89,10 +89,10 @@ const ShortFormRegister = () => {
         // 모든 상태가 null이 아니고 빈 문자열이 아닌지 확인
         if (
             selectedBranch !== null &&
-            teacherName !== '' &&
-            lessonName !== '' &&
+            lesson !== '' &&
             startDate !== null &&
             expireDate !== null &&
+            dropDownTitle !== null &&
             videoFile !== null &&
             thumbnailFile !== null
         ) {
@@ -101,7 +101,7 @@ const ShortFormRegister = () => {
         } else {
             setIsDisabled(true);
         }
-    }, [selectedBranch, teacherName, lessonName, startDate, expireDate, videoFile, thumbnailFile]);
+    }, [selectedBranch, lesson, startDate, expireDate, dropDownTitle, videoFile, thumbnailFile]);
 
     useEffect(() => {
         if (selectedBranch) {

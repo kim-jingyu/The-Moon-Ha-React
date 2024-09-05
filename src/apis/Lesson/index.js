@@ -13,9 +13,10 @@ export const LessonRegisterAPI = (lessonRegister, thumbnailFile, videoFile) => {
     });
 };
 
-export const ShoreFormRegisterAPI = (shortFormRegister, videoFile) => {
+export const ShoreFormRegisterAPI = (shortFormRegister, thumbnailFile, videoFile) => {
     const formData = new FormData();
     formData.append('registerRequest', new Blob([JSON.stringify(shortFormRegister)], { type: 'application/json' }));
+    formData.append('thumbnailFile', thumbnailFile);
     formData.append('shortFormVideoFile', videoFile);
 
     return instance.post('/admin/shortform/register', formData, {
