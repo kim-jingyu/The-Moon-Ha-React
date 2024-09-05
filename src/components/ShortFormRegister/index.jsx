@@ -7,17 +7,19 @@ import { ShoreFormRegisterAPI } from '../../apis/Lesson';
 import FileUpload from '../Upload';
 import WeekPicker from '../WeekPicker';
 import dayjs from 'dayjs';
-import { Dropdown, lessonList } from '../Dropdown';
+import { Dropdown } from '../Dropdown';
+import { useRecoilValue } from 'recoil';
+import { setUpDataState } from '../../recoil';
 
 const ShortFormRegister = () => {
+    const setUpData = useRecoilValue(setUpDataState);
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [lessonDropDown, setLessonDropDown] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [expireDate, setExpireDate] = useState(null);
-    const [teacherName, setTeacherName] = useState('');
-    const [lessonName, setLessonName] = useState('');
+    const [shortFormName, setShortFormName] = useState('');
     const [dropDownTitle, setDropDownTitle] = useState('강좌 선택');
     const [lesson, setLesson] = useState(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
@@ -55,19 +57,20 @@ const ShortFormRegister = () => {
     const handleSubmit = async () => {
         if (!isDisabled) {
             // 서버로 데이터 전송
+            console.log('shortFormRegister lesson : ', lesson);
+            console.log('shortFormRegister lesson.index : ', lesson.index);
             const shortFormRegister = {
-                lessonId: 56,
-                name: teacherName,
+                lessonId: lesson.index,
+                name: shortFormName,
                 startDate: startDate,
                 expireDate: expireDate,
             };
 
             try {
                 // API 호출
-                console.log('videoFile : {}', videoFile);
-                console.log('thumbnailFile : {}', thumbnailFile);
                 const response = await ShoreFormRegisterAPI(shortFormRegister, thumbnailFile, videoFile);
                 console.log('응답 : {}', response);
+
                 if (response.status === 200) {
                     console.log('Success:', response.data);
                     navigate('/shortForm');
@@ -89,6 +92,7 @@ const ShortFormRegister = () => {
         // 모든 상태가 null이 아니고 빈 문자열이 아닌지 확인
         if (
             selectedBranch !== null &&
+            shortFormName !== '' &&
             lesson !== '' &&
             startDate !== null &&
             expireDate !== null &&
@@ -101,19 +105,16 @@ const ShortFormRegister = () => {
         } else {
             setIsDisabled(true);
         }
-    }, [selectedBranch, lesson, startDate, expireDate, dropDownTitle, videoFile, thumbnailFile]);
+    }, [selectedBranch, shortFormName, lesson, startDate, expireDate, dropDownTitle, videoFile, thumbnailFile]);
 
     useEffect(() => {
         if (selectedBranch) {
-            console.log('selectedBranch : ', selectedBranch);
             const foundIndex = selectedBranch ? selectedBranch.index : null;
-            console.log('selectedBranch foundIndex : ', foundIndex);
 
             if (foundIndex !== null) {
-                console.log('들어옴');
-                setDropDownTitle('강좌 선택'); // 제목 초기화
-                setLesson(null); // 선택된 강좌 초기화
-                setLessonDropDown(lessonList.find((l) => l.label === foundIndex)?.items || []);
+                setDropDownTitle('강좌 선택');
+                setLesson(null);
+                setLessonDropDown(setUpData?.lessonBranchDTOList?.find((l) => l.label === foundIndex)?.items || []);
             } else {
                 setLessonDropDown([]);
             }
@@ -136,9 +137,10 @@ const ShortFormRegister = () => {
                             <DropdownWithGroup title="지점 선택" groups={branchItem} onSelect={setSelectedBranch} />
                             <InputField
                                 type="text"
+                                placeholder="숏폼 제목"
                                 width="240px"
-                                value={teacherName}
-                                onChange={(e) => setTeacherName(e.target.value)}
+                                value={shortFormName}
+                                onChange={(e) => setShortFormName(e.target.value)}
                             />
                         </RowItem>
                         <RowItem>

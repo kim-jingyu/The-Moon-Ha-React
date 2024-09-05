@@ -29,6 +29,11 @@ export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelecte
         };
     }, []);
 
+    useEffect(() => {
+        // 외부에서 selectedItem을 업데이트하면 메뉴를 닫음
+        setShowMenu(false);
+    }, [selectedItem]);
+
     return (
         <DropdownContainer ref={dropdownRef}>
             <DropdownButton onClick={toggleMenu}>

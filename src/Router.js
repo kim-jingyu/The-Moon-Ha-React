@@ -20,7 +20,7 @@ const Router = () => {
             {/* <Center> */}
             <Sidebar />
             <Routes>
-                <Route path="/main" element={<Main />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/shortForm" element={<ShortForm />} />
                 <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
                 <Route path="/lesson" element={<Lesson />} />
