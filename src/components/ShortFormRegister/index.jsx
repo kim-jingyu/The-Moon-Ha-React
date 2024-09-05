@@ -7,16 +7,20 @@ import { ShoreFormRegisterAPI } from '../../apis/Lesson';
 import FileUpload from '../Upload';
 import WeekPicker from '../WeekPicker';
 import dayjs from 'dayjs';
+import { Dropdown, lessonList } from '../Dropdown';
 
 const ShortFormRegister = () => {
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedBranch, setSelectedBranch] = useState(null);
-    // // const [category, setCategory] = useState([]);
+    const [lessonDropDown, setLessonDropDown] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [expireDate, setExpireDate] = useState(null);
     const [teacherName, setTeacherName] = useState('');
     const [lessonName, setLessonName] = useState('');
+    const [dropDownTitle, setDropDownTitle] = useState('강좌 선택');
+    const [lesson, setLesson] = useState(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
     const [videoFile, setVideoFile] = useState(null);
 
     const handleWeekChange = (startDateString, endDateString) => {
@@ -43,6 +47,11 @@ const ShortFormRegister = () => {
         setVideoFile(file);
     };
 
+    const handleThumbnailFileChange = (file) => {
+        console.log('image file:', file);
+        setThumbnailFile(file);
+    };
+
     const handleSubmit = async () => {
         if (!isDisabled) {
             // 서버로 데이터 전송
@@ -52,11 +61,11 @@ const ShortFormRegister = () => {
                 startDate: startDate,
                 expireDate: expireDate,
             };
-            console.log('lessonRegister.startDate : ', shortFormRegister.startDate);
-            console.log('lessonRegister.expireDate : ', shortFormRegister.expireDate);
+
             try {
                 // API 호출
                 console.log('videoFile : {}', videoFile);
+                console.log('thumbnailFile : {}', thumbnailFile);
                 const response = await ShoreFormRegisterAPI(shortFormRegister, videoFile);
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
@@ -84,18 +93,41 @@ const ShortFormRegister = () => {
             lessonName !== '' &&
             startDate !== null &&
             expireDate !== null &&
-            videoFile !== null
+            videoFile !== null &&
+            thumbnailFile !== null
         ) {
             console.log('활성화!!~');
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
         }
-    }, [selectedBranch, teacherName, lessonName, startDate, expireDate, videoFile]);
+    }, [selectedBranch, teacherName, lessonName, startDate, expireDate, videoFile, thumbnailFile]);
+
+    useEffect(() => {
+        if (selectedBranch) {
+            console.log('selectedBranch : ', selectedBranch);
+            const foundIndex = selectedBranch ? selectedBranch.index : null;
+            console.log('selectedBranch foundIndex : ', foundIndex);
+
+            if (foundIndex !== null) {
+                console.log('들어옴');
+                setDropDownTitle('강좌 선택'); // 제목 초기화
+                setLesson(null); // 선택된 강좌 초기화
+                setLessonDropDown(lessonList.find((l) => l.label === foundIndex)?.items || []);
+            } else {
+                setLessonDropDown([]);
+            }
+        } else {
+            setLessonDropDown([]);
+        }
+    }, [selectedBranch]);
 
     return (
         <Container>
-            <FileUpload onChange={handleShortFormFileChange} id="video" width="280px" height="496px" />
+            <RowItem>
+                <FileUpload onChange={handleThumbnailFileChange} id="image" width="280px" height="496px" />
+                <FileUpload onChange={handleShortFormFileChange} id="video" width="280px" height="496px" />
+            </RowItem>
             <BodyWrapper>
                 <ContentWrapper>
                     <HintTitle>강좌 선택</HintTitle>
@@ -110,11 +142,12 @@ const ShortFormRegister = () => {
                             />
                         </RowItem>
                         <RowItem>
-                            <InputField
-                                type="text"
-                                width="495px"
-                                value={lessonName}
-                                onChange={(e) => setLessonName(e.target.value)}
+                            <Dropdown
+                                title={dropDownTitle}
+                                group={lessonDropDown}
+                                onSelect={setLesson}
+                                selectedItem={lesson}
+                                setSelectedItem={setLesson}
                             />
                         </RowItem>
                     </ContentItem>

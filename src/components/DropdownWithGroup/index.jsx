@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     DropdownButton,
     DropdownContainer,
@@ -13,6 +13,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 export const DropdownWithGroup = ({ title, groups = [], onSelect }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const dropdownRef = useRef(null);
 
     const toggleMenu = () => setShowMenu(!showMenu);
     const handleItemClick = (item) => {
@@ -21,8 +22,23 @@ export const DropdownWithGroup = ({ title, groups = [], onSelect }) => {
         setShowMenu(false);
     };
 
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setShowMenu(false);
+        }
+    };
+
+    useEffect(() => {
+        // mousedown 이벤트 리스너 등록
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            // 컴포넌트 언마운트 시 이벤트 리스너 제거
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <DropdownContainer>
+        <DropdownContainer ref={dropdownRef}>
             <DropdownButton onClick={toggleMenu}>
                 {selectedItem ? selectedItem.name : title}
                 <IconWrapper>

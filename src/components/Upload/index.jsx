@@ -3,7 +3,7 @@ import { message, Upload, Image, Modal, Button } from 'antd';
 import styled from 'styled-components';
 import { FileUploadContainer, PreviewFile, PreviewImg, ProfileImgInput, ProfileImgLabel } from './styled';
 
-const FileUpload = ({ onChange, id, width = '380px', height = '210px' }) => {
+const FileUpload = ({ onChange, id, width = '380px', height = '180px' }) => {
     const acceptType = id === 'image' ? 'image/*' : id === 'video' ? 'video/*' : '';
 
     const [previewUrl, setPreviewUrl] = useState(null);

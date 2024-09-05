@@ -33,6 +33,7 @@ const LessonRegister = () => {
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [category, setCategory] = useState([]);
+    const [categoryDropDown, setCategoryDropDown] = useState('카테고리명');
     const [teacherName, setTeacherName] = useState('');
     const [isRealTime, setIsRealTime] = useState(false);
     const [lessonName, setLessonName] = useState('');
@@ -177,6 +178,9 @@ const LessonRegister = () => {
             if (foundItem) {
                 const foundLabel = foundBranch ? foundBranch.label : null;
 
+                setCategoryDropDown('카테고리명'); // 제목 초기화
+                setSelectedCategory(null); // 선택된 강좌 초기화
+
                 if (foundLabel === 'CH 1985') {
                     setCategory(category_ch1985);
                 } else if (foundLabel === '문화센터') {
@@ -233,7 +237,13 @@ const LessonRegister = () => {
                     </RowItem>
                     <RowItem>
                         <HintTitle>카테고리</HintTitle>
-                        <Dropdown title="카테고리명" group={category} onSelect={setSelectedCategory} />
+                        <Dropdown
+                            title={categoryDropDown}
+                            group={category}
+                            onSelect={setSelectedCategory}
+                            selectedItem={selectedCategory}
+                            setSelectedItem={setSelectedCategory}
+                        />
                     </RowItem>
                 </RowWrapper>
                 <RowWrapper>
