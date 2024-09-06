@@ -12,6 +12,7 @@ import Prologue from './pages/Prologue';
 import Suggestion from './pages/Suggestion';
 import Studio from './pages/Studio';
 import LessonRegisterPage from './pages/LessonRegister';
+import ShortFormRegisterPage from './pages/ShortFormRegister';
 
 const Router = () => {
     return (
@@ -19,8 +20,9 @@ const Router = () => {
             {/* <Center> */}
             <Sidebar />
             <Routes>
-                <Route path="/main" element={<Main />} />
+                <Route path="/" element={<Main />} />
                 <Route path="/shortForm" element={<ShortForm />} />
+                <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
                 <Route path="/lesson" element={<Lesson />} />
                 <Route path="/lesson/register" element={<LessonRegisterPage />} />
                 <Route path="/craft" element={<Craft />} />

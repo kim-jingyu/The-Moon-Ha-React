@@ -16,17 +16,17 @@ export const MainButton = styled(NavLink)`
     align-items: center;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
-    color: ${colors.drak_gray};
+    color: ${colors.white};
     font-size: 14px;
     text-decoration: none;
     padding: 12px;
     border-radius: 10px;
     &:hover {
-        background-color: ${colors.light_gray};
+        background-color: ${colors.side_bar_hover};
     }
     &.active {
-        color: ${colors.main_green};
-        background-color: ${colors.light_gray};
+        color: ${colors.white};
+        background-color: ${colors.bright_green};
     }
 `;
 
@@ -43,16 +43,16 @@ export const SubMenuLink = styled(NavLink)`
     align-items: center;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 600; /* Bold */
-    color: ${colors.drak_gray};
+    color: ${colors.white};
     font-size: 12px;
     text-decoration: none;
     padding: 12px;
     border-radius: 10px;
     &:hover {
-        background-color: ${colors.light_gray};
+        background-color: ${colors.side_bar_hover};
     }
     &.active {
-        color: ${colors.main_green};
-        background-color: ${colors.light_gray};
+        color: ${colors.white};
+        background-color: ${colors.bright_green};
     }
 `;

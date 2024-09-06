@@ -9,4 +9,6 @@ export const colors = {
     gray: '#D9D9D9',
     white: '#FFFFFF',
     black: '#000000',
+    side_bar: '#343A40',
+    side_bar_hover: '#58626B',
 };

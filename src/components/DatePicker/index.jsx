@@ -3,7 +3,7 @@ import { ConfigProvider, Space } from 'antd';
 import { StyledRangePicker } from './styled';
 import { colors } from '../../styles/colors';
 
-const DatePicker = ({ onChange }) => {
+const DatePicker = ({ onChange, width }) => {
     const handleDateChange = (dates, dateStrings) => {
         if (onChange) {
             onChange(dates, dateStrings);

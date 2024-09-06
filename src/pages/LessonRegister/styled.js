@@ -5,7 +5,6 @@ import '../../styles/font.css';
 
 export const Container = styled.div`
     width: 90vw;
-    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
