@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { BodyWrapper, Container, TitleWrapper } from './styled';
 import { StyledButton } from '../../components/Button/styled';
 import { useNavigate } from 'react-router';
+import PrologueRegister from '../../components/PrologueRegister';
 
-const Prologue = () => {
+const PrologueRegisterPage = () => {
     const navigate = useNavigate();
 
     const handleOnclick = () => {
@@ -12,15 +13,12 @@ const Prologue = () => {
 
     return (
         <Container>
-            <TitleWrapper>
-                프롤로그 관리
-                <StyledButton variant="addBtn" onClick={handleOnclick}>
-                    추가
-                </StyledButton>
-            </TitleWrapper>
-            <BodyWrapper>프롤로그 테마 리스트</BodyWrapper>
+            <TitleWrapper>프롤로그 관리</TitleWrapper>
+            <BodyWrapper>
+                <PrologueRegister />
+            </BodyWrapper>
         </Container>
     );
 };
 
-export default Prologue;
+export default PrologueRegisterPage;
