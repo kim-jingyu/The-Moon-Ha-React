@@ -10,11 +10,22 @@ export const Container = styled.div`
     height: auto;
 `;
 
+export const ModalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 540px;
+    height: auto;
+    // margin: 10px;
+    // background-color: ${colors.main_green};
+`;
+
 export const Wrapper = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    gap: 22px;
     // background-color: ${colors.main_green};
 `;
 
@@ -37,18 +48,31 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    // background-color: ${colors.drak_gray};
 `;
 
 export const RowItem = styled.div`
-    // gap: 15px;
     width: auto;
     align-items: center;
     display: flex;
     flex-direction: row;
 `;
 
-export const BodyWrapperTitle = styled.p`
+export const ModalItem = styled.div`
+    width: auto;
+    display: flex;
+    flex-direction: row;
+`;
+
+export const ModalP = styled.div`
+    font-family: 'Happiness-Sans', sans-serif;
+    font-weight: 800; /* Bold */
+    font-size: 12px;
+    width: 80px;
+    align-items: center;
+    color: ${colors.black};
+`;
+
+export const BodyWrapperTitle = styled.div`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
     font-size: 18px;
