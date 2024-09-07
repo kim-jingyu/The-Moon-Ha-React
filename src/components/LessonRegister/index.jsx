@@ -369,7 +369,7 @@ const LessonRegister = () => {
                 </UploadWrapper>
             </Wrapper>
 
-            <StyledButton variant="lessonRegisterBtn" onClick={handleSubmit} disabled={isDisabled}>
+            <StyledButton variant="registerBtn" onClick={handleSubmit} disabled={isDisabled}>
                 예약 등록하기
             </StyledButton>
         </Container>

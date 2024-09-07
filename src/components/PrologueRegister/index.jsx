@@ -12,6 +12,7 @@ import {
     ModalItem,
     ModalP,
     ModalContainer,
+    AddWrapper,
 } from './styled';
 import DatePicker from '../DatePicker';
 import FileUpload from '../Upload';
@@ -20,16 +21,19 @@ import Button from '../Button';
 
 import plusIcon from '../../assets/images/plusIcon.svg';
 import cancelIcon from '../../assets/images/cancelIcon.svg';
+import CustomTable from '../Table';
+import { prologueRegisterAPI } from '../../apis/Craft';
 
 const PrologueRegister = () => {
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(true);
     const [themeName, setThemeName] = useState('');
     const [description, setDescription] = useState('');
-    const [lessonName, setLessonName] = useState('');
     const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+    const [titleList, setTitleList] = useState([]);
     const [thumbnailList, setThumbnailList] = useState([]);
     const [videoList, setVideoList] = useState([]);
+    const [prologueList, setPrologueList] = useState([]);
 
     const handleDateChange = (dates, dateStrings) => {
         setSelectedDateRange(dates);
@@ -37,51 +41,81 @@ const PrologueRegister = () => {
         console.log('Selected Date Strings:', dateStrings);
     };
 
-    const handleAddPrologue = (newThumbnail, newVideo) => {
+    const handleAddPrologue = (prologueName, newThumbnail, newVideo) => {
         console.log('handleAddPrologue 썸네일 : ', newThumbnail);
         console.log('handleAddPrologue 비디오 : {}', newVideo);
         setThumbnailList([...thumbnailList, newThumbnail]);
         setVideoList([...videoList, newVideo]);
+        setTitleList([...titleList, prologueName]);
+
+        console.log('prologueList.length + 1 : ', prologueList.length);
+        setPrologueList([
+            ...prologueList,
+            {
+                key: prologueList.length + 1,
+                video: newVideo,
+                thumbnail: newThumbnail,
+                title: prologueName,
+                edit: '편집',
+            },
+        ]);
     };
 
-    // const handleSubmit = async () => {
-    //     if (!isDisabled) {
-    //         // 서버로 데이터 전송
-    //         const lessonRegister = {};
+    const handleSubmit = async () => {
+        if (!isDisabled) {
+            // 서버로 데이터 전송
+            const prologueRegister = {
+                name: themeName,
+                memberId: 8,
+                description: description,
+                videoCnt: titleList.length,
+                startDate: selectedDateRange ? selectedDateRange[0].format('YYYY-MM-DD') : null,
+                expireDate: selectedDateRange ? selectedDateRange[1].format('YYYY-MM-DD') : null,
+                prologueList: titleList,
+            };
 
-    //         try {
-    //             // API 호출
-    //             console.info('lessonRegister : {}', lessonRegister);
-    //             console.log('thumbnailFile : {}', thumbnailFile);
-    //             console.log('videoFile : {}', videoFile);
-    //             const response = await LessonRegisterAPI(lessonRegister, thumbnailFile, videoFile);
-    //             console.log('응답 : {}', response);
-    //             if (response.status === 200) {
-    //                 console.log('Success:', response.data);
-    //                 navigate('/lesson');
-    //             } else {
-    //                 console.error('Server Error:', response.status, response.statusText);
-    //             }
-    //         } catch (error) {
-    //             if (error.response) {
-    //                 console.error('서버 응답 에러 데이터:', error.response.data);
-    //                 console.error('서버 응답 상태:', error.response.status);
-    //             } else {
-    //                 console.error('요청 에러:', error.message);
-    //             }
-    //         }
-    //     }
-    // };
+            try {
+                // API 호출
+                console.info('lessonRegister : {}', prologueRegister);
+                console.log('thumbnailFile : {}', thumbnailList);
+                console.log('videoFile : {}', videoList);
+                const response = await prologueRegisterAPI(prologueRegister, thumbnailList, videoList);
 
-    // useEffect(() => {
-    //     // 모든 상태가 null이 아니고 빈 문자열이 아닌지 확인
-    //     if (lessonName !== '' && selectedDateRange !== null && thumbnailFile !== null && videoFile !== null) {
-    //         console.log('활성화!!~');
-    //         setIsDisabled(false);
-    //     } else {
-    //         setIsDisabled(true);
-    //     }
-    // }, [lessonName, selectedDateRange, thumbnailFile, videoFile]);
+                console.log('응답 : {}', response);
+                if (response.status === 200) {
+                    console.log('Success:', response.data);
+                    navigate('/prologue');
+                } else {
+                    console.error('Server Error:', response.status, response.statusText);
+                }
+            } catch (error) {
+                if (error.response) {
+                    console.error('서버 응답 에러 데이터:', error.response.data);
+                    console.error('서버 응답 상태:', error.response.status);
+                } else {
+                    console.error('요청 에러:', error.message);
+                }
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (
+            themeName !== '' &&
+            description !== '' &&
+            selectedDateRange[0] !== null &&
+            titleList.length !== 0 &&
+            thumbnailList.length !== 0 &&
+            videoList.length !== 0 &&
+            titleList.length === thumbnailList.length &&
+            titleList.length === videoList.length
+        ) {
+            console.log('리스트 담긴 수 확인하기 : {}, {}', titleList.length, thumbnailList.length);
+            setIsDisabled(false);
+        } else {
+            setIsDisabled(true);
+        }
+    }, [themeName, description, selectedDateRange, titleList, thumbnailList, videoList]);
 
     return (
         <Container>
@@ -116,21 +150,12 @@ const PrologueRegister = () => {
                     </ContentWrapper>
                 </BodyWrapper>
             </Wrapper>
-
             <Wrapper />
             <Wrapper>
                 <BodyWrapperTitle>프롤로그 등록</BodyWrapperTitle>
-                <BodyWrapper>
-                    <div>
-                        {videoList.map((video, index) => (
-                            <div key={index}>
-                                {/* 동영상 미리보기 또는 정보를 렌더링 */}
-                                <p>{video.name}</p>
-                                {/* 추가 정보 표시 */}
-                            </div>
-                        ))}
-                    </div>
-                </BodyWrapper>
+                <AddWrapper>
+                    <CustomTable columns={columns} data={prologueList} hasPage={false} />
+                </AddWrapper>
 
                 <CustomModal
                     variant="prologuePlusBtn"
@@ -141,11 +166,7 @@ const PrologueRegister = () => {
                 </CustomModal>
             </Wrapper>
 
-            <Button
-                variant="lessonRegisterBtn"
-                // onClick={handleSubmit}
-                disabled={isDisabled}
-            >
+            <Button variant="registerBtn" onClick={handleSubmit} disabled={isDisabled}>
                 예약 등록하기
             </Button>
         </Container>
@@ -164,7 +185,7 @@ const RegisterModal = ({ setOpen, setConfirmLoading, confirmLoading, onUpdate })
         setConfirmLoading(true);
         setTimeout(() => {
             if (onUpdate) {
-                onUpdate(thumbnailFile, videoFile);
+                onUpdate(prologueName, thumbnailFile, videoFile);
             }
             setOpen(false);
             setConfirmLoading(false);
@@ -203,7 +224,6 @@ const RegisterModal = ({ setOpen, setConfirmLoading, confirmLoading, onUpdate })
                 </RowItem>
             </Wrapper>
             <Wrapper>
-                {/* <ModalP>썸네일 사진</ModalP> */}
                 <ModalItem>
                     <ModalP>썸네일 사진</ModalP>
                     <FileUpload onChange={handleThumbnailFileChange} id="image" width="400px" height="226px" />
@@ -228,3 +248,30 @@ const RegisterModal = ({ setOpen, setConfirmLoading, confirmLoading, onUpdate })
         </ModalContainer>
     );
 };
+
+const columns = [
+    {
+        title: '프롤로그',
+        dataIndex: 'video',
+        key: 'video',
+        width: '250px',
+    },
+    {
+        title: '썸네일',
+        dataIndex: 'thumbnail',
+        key: 'thumbnail',
+        width: '250px',
+    },
+    {
+        title: '제목',
+        dataIndex: 'title',
+        key: 'title',
+        width: '450px',
+    },
+    {
+        title: '',
+        dataIndex: 'edit',
+        key: 'edit',
+        width: '150px',
+    },
+];

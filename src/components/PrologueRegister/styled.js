@@ -6,7 +6,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1190px;
+    width: 1100px;
     height: auto;
 `;
 
@@ -42,6 +42,20 @@ export const BodyWrapper = styled.div`
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: ${colors.white};
+`;
+
+export const AddWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    height: auto;
+    box-sizing: border-box;
+    font-family: 'Happiness-Sans', sans-serif;
+    background-color: ${colors.white};
+    font-weight: 400; /* Bold */
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const ContentWrapper = styled.div`

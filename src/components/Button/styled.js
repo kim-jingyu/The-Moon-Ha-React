@@ -31,25 +31,7 @@ const buttonStyles = {
         font-family: 'Happiness-Sans', sans-serif;
         font-weight: 800;
     `,
-    lessonRegisterBtn: css`
-        width: 200px;
-        height: 50px;
-        background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
-        color: ${({ disabled }) => (disabled ? colors.drak_gray : colors.white)};
-        font-size: 12px;
-        border-radius: 5px;
-        cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-        text-align: center;
-        border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        font-family: 'Happiness-Sans', sans-serif;
-        font-weight: 800;
-
-        &:hover {
-            background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
-        }
-    `,
-    shortFormRegisterBtn: css`
+    registerBtn: css`
         width: 200px;
         height: 50px;
         background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
@@ -73,13 +55,11 @@ const buttonStyles = {
         background-color: ${colors.white};
         color: ${colors.black};
         font-size: 12px;
-        border-radius: 5px;
+        border-radius: 10px;
+        border: none;
         cursor: 'pointer';
         text-align: center;
-        border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        font-family: 'Happiness-Sans', sans-serif;
-        font-weight: 800;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 
         &:hover {
             background-color: ${colors.light_gray};
