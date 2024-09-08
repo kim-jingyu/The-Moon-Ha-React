@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Container, Wrapper } from './styled';
 import CustomTable from '../Table';
 import { fetchPrologueThemeListAPI } from '../../apis/Craft';
+import { useNavigate } from 'react-router';
 
 const PrologueList = () => {
+    const navigate = useNavigate();
     const [themeList, setThemeList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,10 +27,29 @@ const PrologueList = () => {
         getPrologueThemeList();
     }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
+    const shouldNavigate = (record) => {
+        return !!record.prologueThemeId; // 예를 들어, prologueThemeId가 존재하는지 확인
+    };
+
+    const handleRowClick = (record) => {
+        if (shouldNavigate(record)) {
+            const url = `/prologue/${record.prologueThemeId}`;
+            navigate(url);
+        } else {
+            console.log('페이지 이동 조건을 충족하지 않음');
+        }
+    };
+
     return (
         <Container>
             <Wrapper>
-                <CustomTable columns={columns} data={themeList} hasPage={true} />
+                <CustomTable
+                    columns={columns}
+                    data={themeList}
+                    hasPage={true}
+                    shouldNavigate={shouldNavigate}
+                    onRowClick={handleRowClick}
+                />
             </Wrapper>
         </Container>
     );
