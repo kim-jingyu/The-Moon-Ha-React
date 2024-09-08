@@ -161,7 +161,7 @@ const ShortFormRegister = () => {
                         </RowItem>
                     </ContentItem>
                 </ContentWrapper>
-                <StyledButton variant="shortFormRegisterBtn" onClick={handleSubmit} disabled={isDisabled}>
+                <StyledButton variant="registerBtn" onClick={handleSubmit} disabled={isDisabled}>
                     예약하기
                 </StyledButton>
             </BodyWrapper>

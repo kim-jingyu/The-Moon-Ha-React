@@ -14,6 +14,7 @@ const FileUpload = ({ onChange, id, width = '380px', height = '180px' }) => {
         console.log('업로드 업로드 : {}', file);
         if (file) {
             setPreviewUrl(URL.createObjectURL(file));
+            console.log('previewUrl : ', previewUrl);
             if (onChange) onChange(file); // 부모 컴포넌트로 파일 전달
         }
     };
