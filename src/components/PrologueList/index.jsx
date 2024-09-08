@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+import { Container, Wrapper } from './styled';
+import CustomTable from '../Table';
+import { fetchPrologueThemeListAPI } from '../../apis/Craft';
+
+const PrologueList = () => {
+    const [themeList, setThemeList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // 데이터를 가져오는 함수
+        const getPrologueThemeList = async () => {
+            try {
+                const response = await fetchPrologueThemeListAPI();
+
+                setThemeList(response.data); // 데이터를 상태로 저장
+                setLoading(false); // 로딩 상태 해제
+            } catch (err) {
+                setError(err); // 에러 상태 설정
+                setLoading(false);
+            }
+        };
+
+        getPrologueThemeList();
+    }, []); // 컴포넌트가 마운트될 때 한 번만 실행
+
+    return (
+        <Container>
+            <Wrapper>
+                <CustomTable columns={columns} data={themeList} hasPage={true} />
+            </Wrapper>
+        </Container>
+    );
+};
+
+export default PrologueList;
+
+const columns = [
+    {
+        title: '테마',
+        dataIndex: 'name',
+        key: 'name',
+        width: '200px',
+    },
+    {
+        title: '설명',
+        dataIndex: 'description',
+        key: 'description',
+        width: '230px',
+    },
+    {
+        title: '영상 수',
+        dataIndex: 'videoCnt',
+        key: 'videoCnt',
+        width: '80px',
+    },
+    {
+        title: '최종 업데이트',
+        dataIndex: 'latestUpdateDate',
+        key: 'latestDate',
+        width: '120px',
+    },
+    {
+        title: '담당자',
+        dataIndex: 'writer',
+        key: 'writer',
+        width: '80px',
+    },
+    {
+        title: '기간',
+        dataIndex: 'period',
+        key: 'period',
+        width: '210px',
+    },
+    {
+        title: '상태',
+        dataIndex: 'themeStatus',
+        key: 'themeStatus',
+        width: '100px',
+    },
+    {
+        title: '편집',
+        dataIndex: 'edit',
+        key: 'edit',
+        width: '150px',
+    },
+];
