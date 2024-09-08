@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BodyWrapper, Container, TitleWrapper } from './styled';
 import { StyledButton } from '../../components/Button/styled';
 import { useNavigate } from 'react-router';
+import PrologueList from '../../components/PrologueList';
 
 const Prologue = () => {
     const navigate = useNavigate();
@@ -18,7 +19,9 @@ const Prologue = () => {
                     추가
                 </StyledButton>
             </TitleWrapper>
-            <BodyWrapper>프롤로그 테마 리스트</BodyWrapper>
+            <BodyWrapper>
+                <PrologueList />
+            </BodyWrapper>
         </Container>
     );
 };

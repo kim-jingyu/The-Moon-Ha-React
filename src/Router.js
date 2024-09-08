@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/index.css';
-import { Center } from './components/Default/styled';
 import Sidebar from './components/Sidebar';
 
 import Main from './pages/Main';
@@ -14,6 +13,7 @@ import Studio from './pages/Studio';
 import LessonRegisterPage from './pages/LessonRegister';
 import ShortFormRegisterPage from './pages/ShortFormRegister';
 import PrologueRegisterPage from './pages/PrologueRegister';
+import PrologueDetailPage from './pages/PrologueDetail';
 
 const Router = () => {
     return (
@@ -28,6 +28,7 @@ const Router = () => {
                 <Route path="/lesson/register" element={<LessonRegisterPage />} />
                 <Route path="/craft" element={<Craft />} />
                 <Route path="/prologue" element={<Prologue />} />
+                <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
                 <Route path="/prologue/register" element={<PrologueRegisterPage />} />
                 <Route path="/suggestion" element={<Suggestion />} />
                 <Route path="/studio" element={<Studio />} />

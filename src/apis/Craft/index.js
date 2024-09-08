@@ -19,3 +19,11 @@ export const prologueRegisterAPI = (prologueRegister, thumbnailFileList, videoFi
         },
     });
 };
+
+export const fetchPrologueThemeListAPI = () => {
+    return instance.get('/admin/craft/prologue/theme/list');
+};
+
+export const fetchPrologueListAPI = (prologueThemeId) => {
+    return instance.get(`/admin/craft/prologue/theme/${prologueThemeId}`);
+};
