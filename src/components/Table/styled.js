@@ -37,4 +37,13 @@ export const StyleTable = styled(Table)`
     .ant-table-tbody > tr.ant-table-row.ant-table-row-selected {
         background: transparent !important; /* 배경색 제거 */
     }
+
+    .ant-table-wrapper .ant-table-cell,
+    .ant-table-wrapper .ant-table-thead > tr > th,
+    .ant-table-wrapper .ant-table-tbody > tr > th,
+    .ant-table-wrapper .ant-table-tbody > tr > td,
+    .ant-table-wrapper tfoot > tr > th,
+    .ant-table-wrapper tfoot > tr > td {
+        padding: 0 !important;
+    }
 `;

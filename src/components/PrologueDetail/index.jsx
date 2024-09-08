@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Wrapper } from './styled';
 import CustomTable from '../Table';
 import { fetchPrologueListAPI } from '../../apis/Craft';
+import Player from '../Player';
 
 const PrologueDetail = ({ prologueThemeId }) => {
     const [prologueList, setPrologueList] = useState([]);
@@ -30,7 +31,7 @@ const PrologueDetail = ({ prologueThemeId }) => {
     return (
         <Container>
             <Wrapper>
-                <CustomTable columns={columns} data={prologueList} hasPage={false} shouldNavigate={() => false} />
+                <CustomTable columns={columns} data={prologueList} shouldNavigate={false} hasPage={false} />
             </Wrapper>
         </Container>
     );
@@ -43,7 +44,8 @@ const columns = [
         title: '영상',
         dataIndex: 'videoUrl',
         key: 'videoUrl',
-        width: '100px',
+        width: '20px',
+        render: (text, record) => <Player url={record.videoUrl} thumbnail={record.thumbnailUrl} />,
     },
     {
         title: '제목',
