@@ -14,11 +14,11 @@ import LessonRegisterPage from './pages/LessonRegister';
 import ShortFormRegisterPage from './pages/ShortFormRegister';
 import PrologueRegisterPage from './pages/PrologueRegister';
 import PrologueDetailPage from './pages/PrologueDetail';
+import LoginPage from './pages/Login';
 
 const Router = () => {
     return (
         <BrowserRouter>
-            {/* <Center> */}
             <Sidebar />
             <Routes>
                 <Route path="/" element={<Main />} />
@@ -32,6 +32,7 @@ const Router = () => {
                 <Route path="/prologue/register" element={<PrologueRegisterPage />} />
                 <Route path="/suggestion" element={<Suggestion />} />
                 <Route path="/studio" element={<Studio />} />
+                <Route path="/login" element={<LoginPage />} />
             </Routes>
             {/* </Center> */}
         </BrowserRouter>
