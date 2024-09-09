@@ -18,24 +18,20 @@ import LoginPage from './pages/Login';
 
 const Router = () => {
     return (
-        <BrowserRouter>
-            <Sidebar />
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/shortForm" element={<ShortForm />} />
-                <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
-                <Route path="/lesson" element={<Lesson />} />
-                <Route path="/lesson/register" element={<LessonRegisterPage />} />
-                <Route path="/craft" element={<Craft />} />
-                <Route path="/prologue" element={<Prologue />} />
-                <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
-                <Route path="/prologue/register" element={<PrologueRegisterPage />} />
-                <Route path="/suggestion" element={<Suggestion />} />
-                <Route path="/studio" element={<Studio />} />
-                <Route path="/login" element={<LoginPage />} />
-            </Routes>
-            {/* </Center> */}
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/shortForm" element={<ShortForm />} />
+            <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
+            <Route path="/lesson" element={<Lesson />} />
+            <Route path="/lesson/register" element={<LessonRegisterPage />} />
+            <Route path="/craft" element={<Craft />} />
+            <Route path="/prologue" element={<Prologue />} />
+            <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
+            <Route path="/prologue/register" element={<PrologueRegisterPage />} />
+            <Route path="/suggestion" element={<Suggestion />} />
+            <Route path="/studio" element={<Studio />} />
+            <Route path="/login" element={<LoginPage />} />
+        </Routes>
     );
 };
 
