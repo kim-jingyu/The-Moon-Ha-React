@@ -5,12 +5,12 @@ export const prologueRegisterAPI = (prologueRegister, thumbnailFileList, videoFi
     formData.append('registerRequest', new Blob([JSON.stringify(prologueRegister)], { type: 'application/json' }));
     // 썸네일 파일 리스트 추가
     thumbnailFileList.forEach((file, index) => {
-        formData.append('thumbnailFile', file); // 배열 인덱스 추가 가능 시: formData.append(`thumbnailFile[${index}]`, file);
+        formData.append('thumbnailFile', file); // 배열 인덱스 추가 가능 시:
     });
 
     // 비디오 파일 리스트 추가
     videoFileList.forEach((file, index) => {
-        formData.append('prologueVideoFile', file); // 배열 인덱스 추가 가능 시: formData.append(`prologueVideoFile[${index}]`, file);
+        formData.append('prologueVideoFile', file); // 배열 인덱스 추가 가능 =
     });
 
     return instance.post('/admin/craft/prologue/register', formData, {
