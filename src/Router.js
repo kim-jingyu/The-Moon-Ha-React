@@ -10,7 +10,7 @@ import Craft from './pages/Craft';
 import Prologue from './pages/Prologue';
 import Suggestion from './pages/Suggestion';
 import LiveStartPage from './pages/LiveStartPage';
-import LiveOpenPage from './pages/LiveOpenPage';
+import LiveBroadcastPage from './pages/LiveBroadcastPage';
 import LessonRegisterPage from './pages/LessonRegister';
 import ShortFormRegisterPage from './pages/ShortFormRegister';
 import PrologueRegisterPage from './pages/PrologueRegister';
@@ -31,7 +31,7 @@ const Router = () => {
       <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
       <Route path="/prologue/register" element={<PrologueRegisterPage />} />
       <Route path="/suggestion" element={<Suggestion />} />
-      <Route path="/live/open" element={<LiveOpenPage />} />
+      <Route path="/live/broadcast" element={<LiveBroadcastPage />} />
       <Route path="/live/start" element={<LiveStartPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
