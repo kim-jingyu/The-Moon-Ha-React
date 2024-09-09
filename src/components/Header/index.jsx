@@ -1,13 +1,37 @@
 import React, { useState } from 'react';
-import { Container, LeftWrapper, LogoImage } from './styled';
+import { Container, LeftWrapper, LogoImage, RightWrapper, StyledLink } from './styled';
 
 import logo from '../../assets/images/logo.svg';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { authState } from '../../recoil';
+import Button from '../Button';
 
 const Header = () => {
+    const isAuthenticated = useRecoilValue(authState);
+    const setAuthState = useSetRecoilState(authState);
+
+    const handleLogout = () => {
+        setAuthState(false);
+    };
+
     return (
         <Container>
-            <LogoImage src={logo} />
-            <LeftWrapper>관리자페이지입니다!</LeftWrapper>
+            <LeftWrapper>
+                <LogoImage src={logo} />
+                관리자페이지입니다!
+            </LeftWrapper>
+            <RightWrapper>
+                {/* hello! */}
+                {isAuthenticated ? (
+                    <Button variant="logoutBtn" onClick={handleLogout}>
+                        LOGOUT
+                    </Button>
+                ) : (
+                    <>
+                        <StyledLink to="/login">LOGIN</StyledLink>/<StyledLink to="/signup">SIGNUP</StyledLink>
+                    </>
+                )}
+            </RightWrapper>
         </Container>
     );
 };

@@ -84,6 +84,15 @@ const buttonStyles = {
             background-color: ${({ disabled }) => (disabled ? colors.light_gray : colors.main_green)};
         }
     `,
+    logoutBtn: css`
+        font-size: 15px;
+        font-family: 'Happiness-Sans', sans-serif;
+        font-weight: 700; /* Bold */
+        border: none;
+        background-color: transparent;
+        font-size: 15px;
+        color: ${colors.white};
+    `,
 };
 
 export const StyledButton = styled.button`
