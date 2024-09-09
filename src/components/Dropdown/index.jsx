@@ -2,16 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DropdownButton, DropdownContainer, DropdownItem, DropdownMenu, IconWrapper } from './styled';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelectedItem }) => {
+export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelectedItem, disabled = false }) => {
     const [showMenu, setShowMenu] = useState(false);
     // const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
 
-    const toggleMenu = () => setShowMenu(!showMenu);
+    const toggleMenu = () => {
+        if (!disabled) {
+            setShowMenu(!showMenu);
+        }
+    };
     const handleItemClick = (item) => {
-        setSelectedItem(item);
-        onSelect(item);
-        setShowMenu(false);
+        if (!disabled) {
+            setSelectedItem(item);
+            onSelect(item);
+            setShowMenu(false);
+        }
     };
 
     const handleClickOutside = (event) => {
@@ -36,19 +42,21 @@ export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelecte
 
     return (
         <DropdownContainer ref={dropdownRef}>
-            <DropdownButton onClick={toggleMenu}>
+            <DropdownButton onClick={toggleMenu} disabled={disabled}>
                 {selectedItem ? selectedItem.name : title}
                 <IconWrapper>
                     <MdKeyboardArrowDown size={20} />
                 </IconWrapper>
             </DropdownButton>
-            <DropdownMenu show={showMenu}>
-                {group.map((item) => (
-                    <DropdownItem key={item.index} onClick={() => handleItemClick(item)}>
-                        {item.name}
-                    </DropdownItem>
-                ))}
-            </DropdownMenu>
+            {!disabled && (
+                <DropdownMenu show={showMenu}>
+                    {group.map((item) => (
+                        <DropdownItem key={item.index} onClick={() => handleItemClick(item)}>
+                            {item.name}
+                        </DropdownItem>
+                    ))}
+                </DropdownMenu>
+            )}
         </DropdownContainer>
     );
 };

@@ -4,7 +4,7 @@ import '../../styles/font.css';
 import { StyleTable } from './styled';
 import { useNavigate } from 'react-router';
 
-const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick }) => {
+const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick, pagination }) => {
     const navigate = useNavigate();
 
     // 클릭 시 이동할 경로를 설정하는 함수
@@ -21,7 +21,7 @@ const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick }) => 
             <StyleTable
                 columns={columns}
                 dataSource={data}
-                pagination={hasPage}
+                pagination={hasPage ? { pageSize: pagination } : false}
                 onRow={(record) => {
                     return {
                         onClick: () => handleClick(record), // 행 클릭 시 호출

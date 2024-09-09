@@ -85,12 +85,11 @@ const buttonStyles = {
         }
     `,
     logoutBtn: css`
-        font-size: 15px;
         font-family: 'Happiness-Sans', sans-serif;
         font-weight: 700; /* Bold */
         border: none;
         background-color: transparent;
-        font-size: 15px;
+        font-size: 12px;
         color: ${colors.white};
     `,
 };

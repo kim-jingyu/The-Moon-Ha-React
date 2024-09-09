@@ -17,6 +17,7 @@ import PrologueRegisterPage from './pages/PrologueRegister';
 import PrologueDetailPage from './pages/PrologueDetail';
 import LoginPage from './pages/Login';
 import SignUpPage from './pages/SignUp';
+import LessonDetailPage from './pages/LessonDetail';
 
 const Router = () => {
   return (

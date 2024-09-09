@@ -25,3 +25,11 @@ export const ShoreFormRegisterAPI = (shortFormRegister, thumbnailFile, videoFile
         },
     });
 };
+
+export const fetchLessonListAPI = (lessonRequest) => {
+    return instance.get('/admin/lesson/list', lessonRequest);
+};
+
+export const fetchLessonDetailAPI = (lessonId) => {
+    return instance.get(`/admin/lesson/detail/${lessonId}`);
+};

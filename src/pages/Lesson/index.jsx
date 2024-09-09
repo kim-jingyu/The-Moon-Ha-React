@@ -4,6 +4,7 @@ import { BodyWrapper, Container, TitleWrapper } from './styled';
 import TabMenu from '../../components/TabMenu';
 import { StyledButton } from '../../components/Button/styled';
 import LessonRegister from '../../components/LessonRegister';
+import LessonList from '../../components/LessonList';
 
 const tabItems = ['전체 조회', '과거 내역'];
 
@@ -41,7 +42,7 @@ const Lesson = () => {
     const renderTabContent = () => {
         switch (activeIndex) {
             case 0:
-                return <AllView />;
+                return <LessonList />;
             case 1:
                 return <PastRecords />;
             default:
