@@ -36,6 +36,7 @@ export const RightWrapper = styled.div`
     display: flex;
     // width: 100px;
     margin: 10px;
+    gap: 10px;
     color: ${colors.white};
     align-items: center;
     justify-context: center;

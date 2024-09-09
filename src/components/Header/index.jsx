@@ -27,7 +27,9 @@ const Header = () => {
                         LOGOUT
                     </Button>
                 ) : (
-                    <StyledLink to="/login">LOGIN</StyledLink>
+                    <>
+                        <StyledLink to="/login">LOGIN</StyledLink>/<StyledLink to="/signup">SIGNUP</StyledLink>
+                    </>
                 )}
             </RightWrapper>
         </Container>
