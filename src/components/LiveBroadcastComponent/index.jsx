@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Container, StyledButton, FormItem, FormWrapper, BroadcastWrapper, InfoSection, StreamInfo } from './styled';
+import {
+  Container,
+  StyledButton,
+  FormItem,
+  FormWrapper,
+  BroadcastWrapper,
+  InfoSection,
+  StreamInfo,
+  VideoInfo,
+} from './styled';
 
 const LiveBroadcastComponent = () => {
   const location = useLocation();
@@ -17,12 +26,13 @@ const LiveBroadcastComponent = () => {
     minutesAgo,
   } = location.state;
 
-  const [isBroadcasting, setIsBroadcasting] = useState(false);
+  const [isBroadcasting, setIsBroadcasting] = useState(true);
   const [websocket, setWebsocket] = useState(null);
   const [mediaRecorder, setMediaRecorder] = useState(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
-    if (isBroadcasting && streamKey) {
+    if (streamKey) {
       const websocket = new WebSocket(`ws://localhost:8080/streaming?streamKey=${streamKey}`);
 
       websocket.onopen = () => {
@@ -50,19 +60,18 @@ const LiveBroadcastComponent = () => {
         }
       };
     }
-  }, [isBroadcasting, streamKey]);
+  }, [streamKey]);
 
   const startMediaStream = async (websocket) => {
     try {
-      const stream = await navigator.mediaDevices.getuserMedia({
+      const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
       });
 
-      const videoElement = document.querySelector('video');
-      if (videoElement) {
-        videoElement.srcObject = stream;
-        videoElement.play();
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
       }
 
       const recorder = new MediaRecorder(stream, {
@@ -80,10 +89,6 @@ const LiveBroadcastComponent = () => {
     } catch (error) {
       console.error('미디어 스트림을 가져오는 중 에러 발생: ', error);
     }
-  };
-
-  const startLiveLesson = () => {
-    setIsBroadcasting(true);
   };
 
   const stopLiveLesson = () => {
@@ -105,12 +110,9 @@ const LiveBroadcastComponent = () => {
           <h2>{instructorName}</h2>
           <p>{description}</p>
           <p>생성된 지: {minutesAgo}분 전</p>
-          {!isBroadcasting ? (
-            <StyledButton onClick={startLiveLesson}>방송 시작</StyledButton>
-          ) : (
-            <StyledButton onClick={stopLiveLesson}>방송 종료</StyledButton>
-          )}
+          <StyledButton onClick={stopLiveLesson}>방송 종료</StyledButton>
         </InfoSection>
+        <VideoInfo ref={videoRef} controls></VideoInfo>
         <StreamInfo>
           <h3>스트리밍 정보</h3>
           <p>방송 URL : {broadcastUrl}</p>

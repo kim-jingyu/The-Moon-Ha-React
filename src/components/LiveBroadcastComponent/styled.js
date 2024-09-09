@@ -42,3 +42,8 @@ export const StreamInfo = styled.div`
   margin-top: 20px;
   text-align: left;
 `;
+
+export const VideoInfo = styled.video`
+  width: '100%';
+  height: 'auto';
+`;
