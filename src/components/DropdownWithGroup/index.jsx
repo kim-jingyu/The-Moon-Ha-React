@@ -10,16 +10,32 @@ import {
 } from './styled';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-export const DropdownWithGroup = ({ title, groups = [], onSelect }) => {
+export const DropdownWithGroup = ({
+    title,
+    groups = [],
+    onSelect,
+    selectedItem,
+    setSelectedItem,
+    disabled = false,
+}) => {
     const [showMenu, setShowMenu] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
+    // const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
 
-    const toggleMenu = () => setShowMenu(!showMenu);
+    // 드롭다운 토글
+    const toggleMenu = () => {
+        if (!disabled) {
+            setShowMenu(!showMenu);
+        }
+    };
+
+    // 아이템 클릭 처리
     const handleItemClick = (item) => {
-        setSelectedItem(item);
-        onSelect(item);
-        setShowMenu(false);
+        if (!disabled) {
+            setSelectedItem(item);
+            onSelect(item);
+            setShowMenu(false);
+        }
     };
 
     const handleClickOutside = (event) => {
@@ -39,17 +55,19 @@ export const DropdownWithGroup = ({ title, groups = [], onSelect }) => {
 
     return (
         <DropdownContainer ref={dropdownRef}>
-            <DropdownButton onClick={toggleMenu}>
+            <DropdownButton onClick={toggleMenu} disabled={disabled}>
                 {selectedItem ? selectedItem.name : title}
                 <IconWrapper>
                     <MdKeyboardArrowDown size={20} />
                 </IconWrapper>
             </DropdownButton>
-            <DropdownMenu show={showMenu}>
-                {groups.map((group, groupIndex) => (
-                    <DropdownGroup key={groupIndex} group={group} onSelect={handleItemClick} />
-                ))}
-            </DropdownMenu>
+            {!disabled && (
+                <DropdownMenu show={showMenu}>
+                    {groups.map((group, groupIndex) => (
+                        <DropdownGroup key={groupIndex} group={group} onSelect={handleItemClick} />
+                    ))}
+                </DropdownMenu>
+            )}
         </DropdownContainer>
     );
 };

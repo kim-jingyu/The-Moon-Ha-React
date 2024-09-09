@@ -203,7 +203,13 @@ const LessonRegister = () => {
                     <RowItem>
                         <HintTitle>지점 선택</HintTitle>
                         {/* 지점 선택 드롭다운 */}
-                        <DropdownWithGroup title="지점명" groups={branchItem} onSelect={setSelectedBranch} />
+                        <DropdownWithGroup
+                            title="지점명"
+                            groups={branchItem}
+                            onSelect={setSelectedBranch}
+                            selectedItem={selectedBranch}
+                            setSelectedItem={setSelectedBranch}
+                        />
                     </RowItem>
                     <RowItem>
                         {/* 강사명 입력 필드 */}

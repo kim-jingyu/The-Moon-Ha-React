@@ -47,6 +47,7 @@ const PrologueList = () => {
                     columns={columns}
                     data={themeList}
                     hasPage={true}
+                    pagination="5"
                     shouldNavigate={shouldNavigate}
                     onRowClick={handleRowClick}
                 />
