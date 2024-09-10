@@ -3,22 +3,31 @@ on:
   push:
     branches:
       - develop
-  pull_request:
-    branches:
-      - develop
 
 jobs:
-  run:
+  build:
+    name: react build & deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code.
-        uses: actions/checkout@v2
-			
-      - name: Install Dependencies
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Get npm cache directory
+        id: npm-cache-dir
+	run: | echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v3
+        id: npm-cache
+	with:
+	  path: ${{ steps.npm-cache-dir.outputs.dir }}
+	  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+	  restore-keys: |
+	    ${{ runner.os }}-node-
+				
+      - name: Install npm Dependencies
         run: npm install
+
 			
-      - name: Build
-        run: yarn build
+      - name: react Build
+        run: npm run build
         
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -28,7 +37,7 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Deploy to S3
-        run: aws s3 sync ./build s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+        run: aws s3 sync ./build s3://${{ secrets.S3_BUCKET }} --delete
 
       - name: Invalidate CloudFront Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths "/*"
