@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { PlayerWrapper, ThumbnailWrapper } from './syteld';
 
-const Player = ({ url, thumbnail }) => {
+const Player = ({ url, thumbnail, width }) => {
     const [playing, setPlaying] = useState(false);
     const playerRef = useRef(null);
     const [hovering, setHovering] = useState(false); // Hover 상태
@@ -38,20 +38,14 @@ const Player = ({ url, thumbnail }) => {
             <PlayerWrapper
                 onMouseEnter={handleMouseEnter} // Hover 시작
                 onMouseLeave={handleMouseLeave} // Hover 종료
+                width={width}
             >
-                {!playing && (
-                    <ThumbnailWrapper
-                        src={thumbnail}
-                        alt="썸네일"
-                        // onClick={handlePlay}
-                    />
-                )}
+                {!playing && <ThumbnailWrapper src={thumbnail} alt="썸네일" />}
                 <ReactPlayer
                     ref={playerRef}
                     url={curr}
                     className="player"
                     playing={playing}
-                    // seek={true}
                     controls={true}
                     onEnded={onEnded}
                     onReady={() => setReady(true)}

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledRangePicker } from './styled';
 import { ConfigProvider } from 'antd';
 import { colors } from '../../styles/colors';
 
-const TimePicker = ({ onChange }) => {
+const TimePicker = ({ onChange, value, disabled = false }) => {
+    const [times, setTimes] = useState(value || [null, null]);
+
+    useEffect(() => {
+        setTimes(value || [null, null]);
+    }, [value]);
+
     const handleTimeChange = (times, timeStrings) => {
+        setTimes(times);
         if (onChange) {
             onChange(times, timeStrings);
         }
@@ -26,8 +33,10 @@ const TimePicker = ({ onChange }) => {
                 minuteStep={10} // 분 단위 간격 설정
                 disabledHours={disabledHours} // 비활성화할 시간 설정
                 disabledMinutes={disabledMinutes} // 비활성화할 분 설정
+                value={times}
                 hideDisabledOptions={true}
                 onChange={handleTimeChange}
+                disabled={disabled}
             />
         </ConfigProvider>
     );
@@ -37,18 +46,18 @@ export default TimePicker;
 // 9시부터 20시까지 선택 가능하도록 시간 설정
 const disabledHours = () => {
     const hours = [];
-    for (let i = 0; i < 9; i++) {
-        hours.push(i); // 0시부터 8시까지 비활성화
+    for (let i = 0; i < 10; i++) {
+        hours.push(i); // 0시부터 9시까지 비활성화
     }
-    for (let i = 21; i < 24; i++) {
-        hours.push(i); // 21시부터 23시까지 비활성화
+    for (let i = 20; i < 24; i++) {
+        hours.push(i); // 20시부터 23시까지 비활성화
     }
     return hours;
 };
 
 const disabledMinutes = (hour) => {
-    if (hour === 20) {
-        return [10, 20, 30, 40, 50]; // 20시 외 모든 분 비활성화
-    }
+    // if (hour === 20) {
+    //     return [10, 20, 30, 40, 50]; // 20시 외 모든 분 비활성화
+    // }
     return []; // 분 단위 제한 없음
 };

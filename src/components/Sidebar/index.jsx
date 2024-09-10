@@ -19,11 +19,11 @@ const menus = [
         icon: lessonIcon,
         path: '/lesson',
     },
-    {
-        name: '통계',
-        icon: analysticIcon,
-        path: '/main',
-    },
+    // {
+    //     name: '통계',
+    //     icon: analysticIcon,
+    //     path: '/main',
+    // },
     {
         name: '문화 공방',
         icon: craftIcon,

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import { colors } from '../../styles/colors';
 
 export const PlayerWrapper = styled.div`
     position: relative;
     border-radius: 10px;
-    width: 328px;
-    height: 180px;
-    margin: 80px 0 25px;
+    width: ${(props) => props.width || '328px'};
+    // margin: 20px 0 20px;
     z-index: 1;
     aspect-ratio: 16 / 9;
 
@@ -25,6 +25,7 @@ export const ThumbnailWrapper = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
     cursor: pointer;
     z-index: 2; /* 썸네일이 ReactPlayer보다 위에 위치 */
 `;

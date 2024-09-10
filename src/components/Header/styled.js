@@ -13,7 +13,7 @@ export const Container = styled.div`
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
-    background-color: ${colors.main_green};
+    background-color: ${colors.side_bar};
 `;
 
 export const LogoImage = styled.img`
@@ -47,7 +47,7 @@ export const RightWrapper = styled.div`
 export const StyledLink = styled(Link)`
     text-decoration: none; /* 기본 밑줄 제거 */
     color: inherit; /* 상위 요소의 색상 상속 */
-    font-size: 15px;
+    font-size: 12px;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
     &:hover {
