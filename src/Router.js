@@ -20,24 +20,25 @@ import SignUpPage from './pages/SignUp';
 import LessonDetailPage from './pages/LessonDetail';
 
 const Router = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/shortForm" element={<ShortForm />} />
-      <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
-      <Route path="/lesson" element={<Lesson />} />
-      <Route path="/lesson/register" element={<LessonRegisterPage />} />
-      <Route path="/craft" element={<Craft />} />
-      <Route path="/prologue" element={<Prologue />} />
-      <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
-      <Route path="/prologue/register" element={<PrologueRegisterPage />} />
-      <Route path="/suggestion" element={<Suggestion />} />
-      <Route path="/live/broadcast" element={<LiveBroadcastPage />} />
-      <Route path="/live/start" element={<LiveStartPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/shortForm" element={<ShortForm />} />
+            <Route path="/shortForm/register" element={<ShortFormRegisterPage />} />
+            <Route path="/lesson" element={<Lesson />} />
+            <Route path="/lesson/:lessonId" element={<LessonDetailPage />} />
+            <Route path="/lesson/register" element={<LessonRegisterPage />} />
+            <Route path="/craft" element={<Craft />} />
+            <Route path="/prologue" element={<Prologue />} />
+            <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
+            <Route path="/prologue/register" element={<PrologueRegisterPage />} />
+            <Route path="/suggestion" element={<Suggestion />} />
+            <Route path="/live/broadcast" element={<LiveBroadcastPage />} />
+            <Route path="/live/start" element={<LiveStartPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
+        </Routes>
+    );
 };
 
 export default Router;
