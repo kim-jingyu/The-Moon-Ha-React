@@ -9,6 +9,8 @@ jobs:
   build:
     name: react build & deploy
     runs-on: ubuntu-latest
+    env:
+      CI: false
 
     steps:
       - name: Checkout source code
