@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { getCookie } from '../utils/cookie';
 const instance = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://themoonha.site',
     timeout: 10000,
     withCredentials: true,
     headers: {
