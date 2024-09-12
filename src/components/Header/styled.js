@@ -8,12 +8,16 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 10vh;
+    height: 60px;
     padding: 22px;
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 700; /* Bold */
     background-color: ${colors.side_bar};
+    // position: sticky;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 `;
 
 export const LogoImage = styled.img`

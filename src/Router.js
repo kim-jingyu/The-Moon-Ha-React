@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './styles/index.css';
-import Sidebar from './components/Sidebar';
 
 import Main from './pages/Main';
 import Lesson from './pages/Lesson';

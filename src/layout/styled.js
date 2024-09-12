@@ -8,5 +8,19 @@ export const LayoutContainer = styled.div`
 
 export const Center = styled.div`
     display: flex;
-    flex-direction: row;
+    flex: 1;
+    margin-top: 60px;
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    height: calc(100vh - 60px);
+    left: 240px;
+    overflow-y: auto;
+`;
+
+export const Content = styled.div`
+    flex: 1;
+    overflow-y: auto;
+    width: calc(100% - 240px);
+    padding: 20px;
+    box-sizing: border-box;
 `;
