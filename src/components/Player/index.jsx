@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { PlayerWrapper, ThumbnailWrapper } from './syteld';
 
-const Player = ({ url, thumbnail, width }) => {
+const Player = ({ url, thumbnail, width, height = '100%', ratio = '16/9' }) => {
     const [playing, setPlaying] = useState(false);
     const playerRef = useRef(null);
     const [hovering, setHovering] = useState(false); // Hover 상태
@@ -39,6 +39,8 @@ const Player = ({ url, thumbnail, width }) => {
                 onMouseEnter={handleMouseEnter} // Hover 시작
                 onMouseLeave={handleMouseLeave} // Hover 종료
                 width={width}
+                height={height}
+                ratio={ratio}
             >
                 {!playing && <ThumbnailWrapper src={thumbnail} alt="썸네일" />}
                 <ReactPlayer
@@ -50,7 +52,7 @@ const Player = ({ url, thumbnail, width }) => {
                     onEnded={onEnded}
                     onReady={() => setReady(true)}
                     width="100%" /* 고정 너비 */
-                    height="100%" /* 고정 높이 */
+                    height="auto" /* 고정 높이 -> height에 맞추려면 100%로 변경하면 됨.*/
                 />
             </PlayerWrapper>
         </>

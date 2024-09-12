@@ -3,10 +3,10 @@ import { BodyWrapper, Container, TitleWrapper } from './styled';
 import { StyledButton } from '../../components/Button/styled';
 import TabMenu, { shortFormTabItems } from '../../components/TabMenu';
 import { useNavigate } from 'react-router';
+import ShortFormList from '../../components/ShortFormList';
 
 // 예시 컴포넌트
-const WeekShortForm = () => <div>금주의 숏폼 화면</div>;
-const AllView = () => <div>전체 조회 화면</div>;
+const WeekShortForm = () => <ShortFormList />;
 const ReservationView = () => <div>예약 등록 화면</div>;
 
 const ShortForm = () => {
@@ -40,8 +40,6 @@ const ShortForm = () => {
             case 0:
                 return <WeekShortForm />;
             case 1:
-                return <AllView />;
-            case 2:
                 return <ReservationView />;
             default:
                 return null;

@@ -11,4 +11,5 @@ export const colors = {
     black: '#000000',
     side_bar: '#343A40',
     side_bar_hover: '#58626B',
+    dropdown_hover: '#F8FAF9',
 };

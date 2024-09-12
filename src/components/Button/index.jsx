@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spinner, StyledButton } from './styled';
 
-const Button = ({ key, variant, onClick, loading, children, disabled, type = 'button', active }) => {
+const Button = ({ key, variant, onClick, loading, children, disabled, type = 'button', active, icon }) => {
     return (
         <StyledButton
             key={key}
@@ -11,6 +11,7 @@ const Button = ({ key, variant, onClick, loading, children, disabled, type = 'bu
             loading={loading}
             disabled={disabled}
             className={active ? 'active' : ''}
+            icon={icon}
         >
             {loading ? <Spinner /> : children} {/* 로딩 중일 때 스피너 표시 */}
         </StyledButton>
