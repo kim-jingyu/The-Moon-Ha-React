@@ -33,3 +33,15 @@ export const fetchLessonListAPI = (lessonRequest) => {
 export const fetchLessonDetailAPI = (lessonId) => {
     return instance.get(`/admin/lesson/detail/${lessonId}`);
 };
+
+export const fetchShortFormAPI = (branchId, yearMonth) => {
+    const params = new URLSearchParams();
+
+    if (branchId !== null && branchId !== undefined) {
+        params.append('branchId', branchId);
+    }
+
+    params.append('yearMonth', yearMonth);
+
+    return instance.get(`/admin/shortform/list?${params.toString()}`);
+};

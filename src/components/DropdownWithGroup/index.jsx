@@ -11,7 +11,7 @@ import {
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export const DropdownWithGroup = ({
-    title,
+    title = '',
     groups = [],
     onSelect,
     selectedItem,

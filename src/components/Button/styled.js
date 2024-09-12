@@ -92,6 +92,29 @@ const buttonStyles = {
         font-size: 12px;
         color: ${colors.white};
     `,
+    calendarBtn: css`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        background-image: ${({ icon }) => (icon ? `url(${icon})` : 'none')};
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 10px;
+        background-color: transparent;
+
+        &.active {
+            /* active 상태에 따른 추가 스타일 */
+            border: 2px solid ${colors.drak_gray};
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    `,
 };
 
 export const StyledButton = styled.button`

@@ -5,9 +5,12 @@ export const PlayerWrapper = styled.div`
     position: relative;
     border-radius: 10px;
     width: ${(props) => props.width || '328px'};
+    height: ${(props) => props.height || '100%'};
     // margin: 20px 0 20px;
     z-index: 1;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: ${(props) => props.ratio || '16 / 9'};
+    background-color: black;
+    overflow: hidden;
 
     .player {
         position: relative; /* absolute 대신 relative 사용 */

@@ -18,4 +18,4 @@ const TabMenu = ({ tabItems, activeIndex, onTabClick }) => {
 export default TabMenu;
 
 export const lessonTabItems = ['전체 조회', '과거 내역'];
-export const shortFormTabItems = ['금주의 숏폼', '전체 조회', '예약 등록'];
+export const shortFormTabItems = ['전체 조회', '예약 등록'];

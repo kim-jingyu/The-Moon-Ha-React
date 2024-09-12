@@ -7,6 +7,7 @@ import { colors } from '../../styles/colors';
 export const DropdownContainer = styled.div`
     position: relative;
     display: inline-block;
+    z-index: 2;
 `;
 
 export const DropdownGroupContainer = styled.div`

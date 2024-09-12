@@ -134,7 +134,13 @@ const ShortFormRegister = () => {
                     <HintTitle>강좌 선택</HintTitle>
                     <ContentItem>
                         <RowItem>
-                            <DropdownWithGroup title="지점 선택" groups={branchItem} onSelect={setSelectedBranch} />
+                            <DropdownWithGroup
+                                title="지점 선택"
+                                groups={branchItem}
+                                onSelect={setSelectedBranch}
+                                selectedItem={selectedBranch}
+                                setSelectedItem={setSelectedBranch}
+                            />
                             <InputField
                                 type="text"
                                 placeholder="숏폼 제목"
