@@ -8,7 +8,8 @@ import ShortForm from './pages/ShortForm';
 import Craft from './pages/Craft';
 import Prologue from './pages/Prologue';
 import Suggestion from './pages/Suggestion';
-import Studio from './pages/Studio';
+import LiveStartPage from './pages/LiveStartPage';
+import LiveBroadcastPage from './pages/LiveBroadcastPage';
 import LessonRegisterPage from './pages/LessonRegister';
 import ShortFormRegisterPage from './pages/ShortFormRegister';
 import PrologueRegisterPage from './pages/PrologueRegister';
@@ -31,7 +32,8 @@ const Router = () => {
             <Route path="/prologue/:prologueThemeId" element={<PrologueDetailPage />} />
             <Route path="/prologue/register" element={<PrologueRegisterPage />} />
             <Route path="/suggestion" element={<Suggestion />} />
-            <Route path="/studio" element={<Studio />} />
+            <Route path="/live/broadcast" element={<LiveBroadcastPage />} />
+            <Route path="/live/start" element={<LiveStartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signUp" element={<SignUpPage />} />
         </Routes>

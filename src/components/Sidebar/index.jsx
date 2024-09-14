@@ -34,20 +34,20 @@ const menus = [
         ],
     },
     {
-        name: '방송 관리',
-        icon: studioIcon,
-        path: '/studio',
+      name: '방송 관리',
+      icon: studioIcon,
+      path: '/live/start',
     },
 ];
 
 const Sidebar = () => {
-    return (
-        <Container>
-            {menus.map((btn, i) => (
-                <SidebarButton key={i} name={btn.name} icon={btn.icon} path={btn.path} subBtn={btn.subBtn} />
-            ))}
-        </Container>
-    );
+  return (
+    <Container>
+      {menus.map((btn, i) => (
+        <SidebarButton key={i} name={btn.name} icon={btn.icon} path={btn.path} subBtn={btn.subBtn} />
+      ))}
+    </Container>
+  );
 };
 
 export default Sidebar;
