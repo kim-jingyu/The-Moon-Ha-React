@@ -88,6 +88,7 @@ const buttonStyles = {
         font-family: 'Happiness-Sans', sans-serif;
         font-weight: 700; /* Bold */
         border: none;
+        cursor: pointer;
         background-color: transparent;
         font-size: 12px;
         color: ${colors.white};
