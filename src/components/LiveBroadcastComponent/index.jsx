@@ -1,51 +1,101 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import {
-  Container,
-  StyledButton,
-  BroadcastWrapper,
-  InfoSection,
-  StreamInfo,
-  VideoInfo,
-} from './styled';
+import React, { useEffect, useRef, useState } from "react";
+import { createClient, createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng";
+import { BroadcastWrapper, Container, DetailsWrapper, ErrorMessage, InfoSection, StreamDetail, StreamInfo, StreamStatus, StyledButton, VideoInfo, VideoPlaceholder, VideoSection } from "./styled";
+import { useLocation } from "react-router";
 
 const LiveBroadcastComponent = () => {
+  const display = useRef(null);
   const location = useLocation();
-  const {
-    liveId,
-    title,
-    streamKey,
-    description,
-    profileImgUrl,
-    instructorName,
-    thumbnailUrl,
-    broadcastUrl,
-    status,
-    minutesAgo,
-  } = location.state;
+  const { liveId, title } = location.state || {};
+  const [status, setStatus] = useState(null);
+  const [onAir, setOnAir] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [peerConnection, setPeerConnection] = useState(null);
-  const [isBroadcasting, setIsBroadcasting] = useState(true);
-  const videoRef = useRef(null);
+  const startLocalPreview = async () => {
+    try {
+      const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      if (display.current) {
+        display.current.srcObject = localStream;
+        display.current.play();
+      }
+    } catch (err) {
+      setError("카메라 또는 마이크 권한이 필요합니다.");
+    }
+  };
 
-  let signalingSocket = null; // useEffect 바깥에서 선언
+  useEffect(() => {
+    const client = createClient({ mode: "rtc", codec: "vp8" });
+    const appId = process.env.REACT_APP_STREAMING_ID;
+    const token = null;
+    const channelName = liveId ? liveId.toString() : "null";
 
+    async function startStream() {
+      try {
+        await client.join(appId, channelName, token, null);
+        const [microphoneTrack, cameraTrack] = await createMicrophoneAndCameraTracks();
+        await client.publish([microphoneTrack, cameraTrack]);
+        setStatus(client);
+      } catch (err) {
+        setError("스트리밍 시작에 실패했습니다.");
+      }
+    }
+
+    startStream();
+    startLocalPreview();
+
+    return () => {
+      if (status) {
+        status.leave();
+      }
+    };
+  }, [liveId, title]);
+
+  const endLive = () => {
+    if (status) {
+      status.leave();
+      setOnAir(false);
+    }
+  }
   return (
     <Container>
-      <h1>{title} 라이브</h1>
       <BroadcastWrapper>
-        <InfoSection>
-          <img src={thumbnailUrl} alt="강의 썸네일" />
-          <h2>{instructorName}</h2>
-          <p>{description}</p>
-          <p>생성된 지: {minutesAgo}분 전</p>
-        </InfoSection>
-        <StreamInfo>
-          <h3>스트리밍 정보</h3>
-          <p>방송 URL : {broadcastUrl}</p>
-          <p>스트림 키 : {streamKey}</p>
-          <p>현재 상태 : {status}</p>
-        </StreamInfo>
+        <VideoSection>
+          {error ? (
+            <ErrorMessage>{error}</ErrorMessage>
+          ) : (
+            onAir ? (
+              <VideoInfo ref={display} autoPlay playsInline />
+            ) : (
+              <VideoPlaceholder>방송이 종료되었습니다.</VideoPlaceholder>
+            )
+          )}
+        </VideoSection>
+
+        <DetailsWrapper>
+          <InfoSection>
+            <h2>{title}</h2>
+            <StreamStatus onAir={onAir}>
+              {onAir ? "OnAir" : "End"}
+            </StreamStatus>
+          </InfoSection>
+          
+          <StreamInfo>
+            <h3>스트리밍 정보</h3>
+            <StreamDetail>
+              <strong>방송 상태:</strong> {onAir ? "OnAir" : "End"}
+            </StreamDetail>
+            <StreamDetail>
+              <strong>해상도:</strong> 640x480
+            </StreamDetail>
+            <StreamDetail>
+              <strong>프레임 레이트:</strong> 15 fps
+            </StreamDetail>
+          </StreamInfo>
+          
+          <StyledButton onClick={endLive} disabled={!onAir}>
+            {onAir ? "방송 종료하기" : "종료되었습니다"}
+          </StyledButton>
+        </DetailsWrapper>
       </BroadcastWrapper>
     </Container>
   );
