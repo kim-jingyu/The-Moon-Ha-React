@@ -103,7 +103,7 @@ const LessonRegister = () => {
                 startTime: selectedTimeRange ? selectedTimeRange[0].format('HH:mm') : null,
                 endTime: selectedTimeRange ? selectedTimeRange[1].format('HH:mm') : null,
                 summary: summary,
-                cnt: weeks,
+                cnt: weeks + 1,
                 cost: lessonFee,
                 curriculum: curriculum,
                 supply: supply,

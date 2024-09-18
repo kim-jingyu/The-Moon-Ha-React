@@ -14,8 +14,8 @@ const Player = ({ url, thumbnail, width, height = '100%', ratio = '16/9' }) => {
     const handleMouseEnter = () => {
         setHovering(true);
         hoverTimeout.current = setTimeout(() => {
-            setPlaying(true); // 1초 후 비디오 재생
-        }, 1000); // 1초 지연
+            setPlaying(true); // 0.5초 후 비디오 재생
+        }, 500); // 0.5초 지연
     };
 
     const handleMouseLeave = () => {
@@ -29,8 +29,8 @@ const Player = ({ url, thumbnail, width, height = '100%', ratio = '16/9' }) => {
     };
 
     const onEnded = () => {
-        setCurr({ url });
-        setPlaying(true);
+        playerRef.current.seekTo(0); // 동영상 끝나면 처음으로 돌아감
+        setPlaying(true); // 계속 재생
     };
 
     return (
