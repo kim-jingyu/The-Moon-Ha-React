@@ -11,3 +11,7 @@ export const LiveLessonRegisterAPI = (liveLessonRequest, thumbnail) => {
     },
   });
 };
+
+export const LiveLessonEndAPI = (liveId) => {
+  return instance.post(`/live/${liveId}/end`);
+};

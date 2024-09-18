@@ -1,7 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import { createClient, createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng";
-import { BroadcastWrapper, Container, DetailsWrapper, ErrorMessage, InfoSection, StreamDetail, StreamInfo, StreamStatus, StyledButton, VideoInfo, VideoPlaceholder, VideoSection } from "./styled";
-import { useLocation } from "react-router";
+import React, { useEffect, useRef, useState } from 'react';
+import { createClient, createMicrophoneAndCameraTracks } from 'agora-rtc-sdk-ng';
+import {
+  BroadcastWrapper,
+  Container,
+  DetailsWrapper,
+  ErrorMessage,
+  InfoSection,
+  StreamDetail,
+  StreamInfo,
+  StreamStatus,
+  StyledButton,
+  VideoInfo,
+  VideoPlaceholder,
+  VideoSection,
+} from './styled';
+import { useLocation } from 'react-router';
+import { LiveLessonEndAPI } from '../../apis/Live';
 
 const LiveBroadcastComponent = () => {
   const display = useRef(null);
@@ -19,15 +33,15 @@ const LiveBroadcastComponent = () => {
         display.current.play();
       }
     } catch (err) {
-      setError("카메라 또는 마이크 권한이 필요합니다.");
+      setError('카메라 또는 마이크 권한이 필요합니다.');
     }
   };
 
   useEffect(() => {
-    const client = createClient({ mode: "rtc", codec: "vp8" });
+    const client = createClient({ mode: 'rtc', codec: 'vp8' });
     const appId = process.env.REACT_APP_STREAMING_ID;
     const token = null;
-    const channelName = liveId ? liveId.toString() : "null";
+    const channelName = liveId ? liveId.toString() : 'null';
 
     async function startStream() {
       try {
@@ -36,7 +50,7 @@ const LiveBroadcastComponent = () => {
         await client.publish([microphoneTrack, cameraTrack]);
         setStatus(client);
       } catch (err) {
-        setError("스트리밍 시작에 실패했습니다.");
+        setError('스트리밍 시작에 실패했습니다.');
       }
     }
 
@@ -50,39 +64,41 @@ const LiveBroadcastComponent = () => {
     };
   }, [liveId, title]);
 
-  const endLive = () => {
+  const endLive = async (e) => {
+    e.preventDefault();
     if (status) {
+      try {
+        await LiveLessonEndAPI(liveId);
+        setOnAir(false);
+      } catch (err) {
+        setError('방송 종료 실패: ' + (err.response?.data?.message || err.message));
+      }
       status.leave();
-      setOnAir(false);
     }
-  }
+  };
   return (
     <Container>
       <BroadcastWrapper>
         <VideoSection>
           {error ? (
             <ErrorMessage>{error}</ErrorMessage>
+          ) : onAir ? (
+            <VideoInfo ref={display} autoPlay playsInline />
           ) : (
-            onAir ? (
-              <VideoInfo ref={display} autoPlay playsInline />
-            ) : (
-              <VideoPlaceholder>방송이 종료되었습니다.</VideoPlaceholder>
-            )
+            <VideoPlaceholder>방송이 종료되었습니다.</VideoPlaceholder>
           )}
         </VideoSection>
 
         <DetailsWrapper>
           <InfoSection>
             <h2>{title}</h2>
-            <StreamStatus onAir={onAir}>
-              {onAir ? "OnAir" : "End"}
-            </StreamStatus>
+            <StreamStatus onAir={onAir}>{onAir ? 'OnAir' : 'End'}</StreamStatus>
           </InfoSection>
-          
+
           <StreamInfo>
             <h3>스트리밍 정보</h3>
             <StreamDetail>
-              <strong>방송 상태:</strong> {onAir ? "OnAir" : "End"}
+              <strong>방송 상태:</strong> {onAir ? 'OnAir' : 'End'}
             </StreamDetail>
             <StreamDetail>
               <strong>해상도:</strong> 640x480
@@ -91,9 +107,9 @@ const LiveBroadcastComponent = () => {
               <strong>프레임 레이트:</strong> 15 fps
             </StreamDetail>
           </StreamInfo>
-          
+
           <StyledButton onClick={endLive} disabled={!onAir}>
-            {onAir ? "방송 종료하기" : "종료되었습니다"}
+            {onAir ? '방송 종료하기' : '종료되었습니다'}
           </StyledButton>
         </DetailsWrapper>
       </BroadcastWrapper>
