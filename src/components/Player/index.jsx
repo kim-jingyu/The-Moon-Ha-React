@@ -42,7 +42,7 @@ const Player = ({ url, thumbnail, width, height = '100%', ratio = '16/9' }) => {
                 height={height}
                 ratio={ratio}
             >
-                {!playing && <ThumbnailWrapper src={thumbnail} alt="썸네일" />}
+                {thumbnail && !playing && <ThumbnailWrapper src={thumbnail} alt="썸네일" />}
                 <ReactPlayer
                     ref={playerRef}
                     url={curr}

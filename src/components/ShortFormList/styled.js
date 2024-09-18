@@ -11,10 +11,8 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
     gap: 22px;
     flex: 1;
-    // background-color: ${colors.drak_gray};
 `;
 
 export const HeadWrapper = styled.div`
@@ -29,9 +27,6 @@ export const HeadWrapper = styled.div`
 
 export const BodyWrapper = styled.div`
     display: flex;
-    // width: 100%;
-    // overflow-y: auto;
-    // background-color: ${colors.drak_gray};
 `;
 
 export const VideoGrid = styled.div`
