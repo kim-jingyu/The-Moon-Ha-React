@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, FormWrapper, FormItem, StyledButton, SelectLesson } from './styled';
+import { Container, FormWrapper, FormItem, StyledButton, SelectLesson, SelectLessonWrapper, FormItemWithoutWrapper } from './styled';
 import { useNavigate } from 'react-router-dom';
+import { fetchLessonByTutorAPI } from '../../apis/Lesson';
+import { LiveLessonRegisterAPI } from '../../apis/Live';
 
 const LiveStartComponent = () => {
   const [title, setTitle] = useState('');
@@ -15,7 +17,7 @@ const LiveStartComponent = () => {
   useEffect(() => {
     var fetchLessons = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/lesson/by-tutor');
+        const response = await fetchLessonByTutorAPI();
         setLessons(response.data);
       } catch (error) {
         console.error('강의 목록 로딩에 실패했습니다: ', error);
@@ -33,30 +35,16 @@ const LiveStartComponent = () => {
     }
     setIsLoading(true);
 
-    const data = new FormData();
     const liveLessonRequest = {
       title: title,
       description: description,
       lessonId: lessonId,
     };
 
-    data.append(
-      'liveLessonRequest',
-      new Blob([JSON.stringify(liveLessonRequest)], {
-        type: 'application/json',
-      }),
-    );
-    data.append('thumbnail', thumbnail);
-
     try {
-      const response = await axios.post('http://localhost:8080/live', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('response: ', response.data);
+      const response = await LiveLessonRegisterAPI(liveLessonRequest, thumbnail);
       if (response.status === 201) {
-        navigate('/live/broadcast', { state: response.data });
+        navigate('/live/broadcast', { state: { liveId: response.data.liveId, title } });
       }
     } catch (error) {
       console.error('라이브 강좌 생성 중 에러 발생: ', error.response || error.message);
@@ -99,7 +87,7 @@ const LiveStartComponent = () => {
           </SelectLesson>
         </FormItem>
         <StyledButton type="submit" disabled={isLoading}>
-          {isLoading ? '생성중 기다리셈' : '라이브 강좌 생성'}
+          {isLoading ? '생성중' : '라이브 강좌 생성'}
         </StyledButton>
       </FormWrapper>
     </Container>
