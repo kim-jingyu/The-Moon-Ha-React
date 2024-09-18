@@ -21,5 +21,5 @@ export const Wrapper = styled.div`
     font-weight: 400; /* Bold */
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: ${colors.drak_gray};
+    background-color: ${colors.white};
 `;
