@@ -25,6 +25,8 @@ import CustomTable from '../Table';
 import { prologueRegisterAPI, prologueRegisterAPIV2 } from '../../apis/Craft';
 import { getFileNameServer } from '../../util';
 import { getPresignedUrl, getPresignedUrlList, uploadFileToS3 } from '../../apis/S3';
+import Player from '../Player';
+import CustomImage from '../Image';
 
 const PrologueRegister = () => {
     const navigate = useNavigate();
@@ -58,8 +60,8 @@ const PrologueRegister = () => {
             ...prologueList,
             {
                 key: prologueList.length + 1,
-                video: newVideo,
-                thumbnail: newThumbnail,
+                video: URL.createObjectURL(newVideo),
+                thumbnail: URL.createObjectURL(newThumbnail),
                 title: prologueName,
                 edit: '편집',
             },
@@ -340,19 +342,32 @@ const columns = [
         title: '프롤로그',
         dataIndex: 'video',
         key: 'video',
-        width: '250px',
+        width: '300px',
+        render: (text, record) => (
+            <Player
+                url={record.video} // 비디오 URL 데이터 인덱스에 맞게 수정
+                width="100%" // 원하는 너비
+                height="auto" // 원하는 높이
+            />
+        ),
     },
     {
         title: '썸네일',
         dataIndex: 'thumbnail',
         key: 'thumbnail',
-        width: '250px',
+        width: '300px',
+        render: (text, record) => (
+            <CustomImage
+                src={record.thumbnail} // 비디오 URL 데이터 인덱스에 맞게 수정
+                width="100%" // 원하는 너비
+            />
+        ),
     },
     {
         title: '제목',
         dataIndex: 'title',
         key: 'title',
-        width: '450px',
+        width: '350px',
     },
     {
         title: '',

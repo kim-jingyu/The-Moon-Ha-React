@@ -5,11 +5,11 @@ import '../../styles/font.css';
 export const FileUploadContainer = styled.div`
     display: flex;
     width: ${(props) => props.width};
-    height: ${(props) => props.height};
     align-items: center;
     justify-content: center;
     box-sizing: board-box;
     border: 1px solid ${colors.gray};
+    aspect-ratio: ${(props) => props.ratio || '16 / 9'};
 `;
 
 // styled-components로 스타일링
@@ -26,7 +26,6 @@ export const ProfileImgLabel = styled.label`
     font-family: 'Happiness-Sans', sans-serif;
     font-size: 12px;
     font-weight: 400;
-    color: ${colors.drak_gray};
 `;
 
 export const ProfileImgInput = styled.input`

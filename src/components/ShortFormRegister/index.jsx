@@ -126,8 +126,20 @@ const ShortFormRegister = () => {
     return (
         <Container>
             <RowItem>
-                <FileUpload onChange={handleThumbnailFileChange} id="image" width="280px" height="496px" />
-                <FileUpload onChange={handleShortFormFileChange} id="video" width="280px" height="496px" />
+                <FileUpload
+                    onChange={handleThumbnailFileChange}
+                    id="image"
+                    width="280px"
+                    ratio="9/16"
+                    placeholder="썸네일 업로드"
+                />
+                <FileUpload
+                    onChange={handleShortFormFileChange}
+                    id="video"
+                    width="280px"
+                    ratio="9/16"
+                    placeholder="영상 업로드"
+                />
             </RowItem>
             <BodyWrapper>
                 <ContentWrapper>
