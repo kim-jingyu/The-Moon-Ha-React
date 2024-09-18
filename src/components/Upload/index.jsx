@@ -4,7 +4,14 @@ import styled from 'styled-components';
 import { FileUploadContainer, PreviewFile, PreviewImg, ProfileImgInput, ProfileImgLabel } from './styled';
 import Player from '../Player';
 
-const FileUpload = ({ onChange, id, width = '380px', height = '180px', ratio = '16/9' }) => {
+const FileUpload = ({
+    onChange,
+    id,
+    width = '380px',
+    height = '180px',
+    ratio = '16/9',
+    placeholder = '파일 업로드',
+}) => {
     const acceptType = id === 'image' ? 'image/*' : id === 'video' ? 'video/*' : '';
 
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -40,7 +47,7 @@ const FileUpload = ({ onChange, id, width = '380px', height = '180px', ratio = '
                     <PreviewFile src={previewUrl} alt="미리보기" style={{ width, height }} />
                 )
             ) : (
-                <ProfileImgLabel htmlFor={id}>파일 업로드</ProfileImgLabel>
+                <ProfileImgLabel htmlFor={id}>{placeholder}</ProfileImgLabel>
             )}
             <ProfileImgInput type="file" accept={acceptType} id={id} onChange={handleFileChange} ref={imgRef} />
         </FileUploadContainer>
