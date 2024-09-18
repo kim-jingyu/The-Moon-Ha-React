@@ -22,7 +22,9 @@ import Button from '../Button';
 import plusIcon from '../../assets/images/plusIcon.svg';
 import cancelIcon from '../../assets/images/cancelIcon.svg';
 import CustomTable from '../Table';
-import { prologueRegisterAPI } from '../../apis/Craft';
+import { prologueRegisterAPI, prologueRegisterAPIV2 } from '../../apis/Craft';
+import { getFileNameServer } from '../../util';
+import { getPresignedUrl, getPresignedUrlList, uploadFileToS3 } from '../../apis/S3';
 
 const PrologueRegister = () => {
     const navigate = useNavigate();
@@ -34,6 +36,9 @@ const PrologueRegister = () => {
     const [thumbnailList, setThumbnailList] = useState([]);
     const [videoList, setVideoList] = useState([]);
     const [prologueList, setPrologueList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [presignedUrls, setPresignedUrls] = useState({ videoUrls: {}, thumbnailUrls: {} });
+    const [fileNames, setFileNames] = useState({ videoFileNames: [], prologueFileNames: [] });
 
     const handleDateChange = (dates, dateStrings) => {
         setSelectedDateRange(dates);
@@ -62,7 +67,71 @@ const PrologueRegister = () => {
     };
 
     const handleSubmit = async () => {
+        const videoFileNames = videoList.map((file) => file.name);
+        const thumbnailFileNames = thumbnailList.map((file) => file.name);
+
+        setFileNames({
+            videoFileNames,
+            thumbnailFileNames,
+        });
+        console.log('videoFileNames : {}', videoFileNames);
+        console.log('thumbnailFileNames : {}', thumbnailFileNames);
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        setLoading(true);
+
         if (!isDisabled) {
+            console.log('1. 비디오 파일 presigned URLs 요청 ', videoFileNames);
+
+            // 1. 비디오 파일 presigned URLs 요청
+            const videoResponse = await getPresignedUrlList(videoFileNames);
+            console.log('videoResponse : {}', videoResponse);
+            const videoPresignedUrls = await videoResponse.data;
+            console.log('videoPresignedUrls : {}', videoPresignedUrls);
+
+            console.log('2. 프롤로그 파일 presigned URLs 요청 ', thumbnailFileNames);
+            // 2. 프롤로그 파일 presigned URLs 요청
+            const thumbnailResponse = await getPresignedUrlList(thumbnailFileNames);
+            console.log('thumbnailResponse : {}', thumbnailResponse);
+            const thumbnailPresignedUrls = await thumbnailResponse.data;
+            console.log('thumbnailPresignedUrls : {}', thumbnailPresignedUrls);
+
+            // Presigned URLs을 상태에 저장
+            setPresignedUrls({
+                videoUrls: videoPresignedUrls,
+                thumbnailUrls: thumbnailPresignedUrls,
+            });
+            console.log('videoPresignedUrls : {}', videoPresignedUrls);
+            console.log('thumbnailPresignedUrls : {}', thumbnailPresignedUrls);
+
+            // await new Promise((resolve) => setTimeout(resolve, 0));
+
+            // console.log('presignedUrls.videoUrls keys:', Object.keys(videoPresignedUrls));
+            // console.log('presignedUrls.thumbnailUrls keys:', Object.keys(thumbnailPresignedUrls));
+
+            // 3. 파일 업로드
+            const uploadPromises = [
+                ...videoList.map((file, index) => {
+                    const fileName = videoFileNames[index];
+                    const presignedUrl = videoPresignedUrls[fileName];
+                    console.log('fileName, presignedUrl ', fileName, ' ', presignedUrl);
+                    return uploadFileToS3(file, presignedUrl);
+                }),
+                ...thumbnailList.map((file, index) => {
+                    const fileName = thumbnailFileNames[index];
+                    const presignedUrl = thumbnailPresignedUrls[fileName];
+                    console.log('fileName, presignedUrl ', fileName, ' ', presignedUrl);
+                    return uploadFileToS3(file, presignedUrl);
+                }),
+            ];
+            await Promise.all(uploadPromises);
+            console.log('파일 업로드 완료');
+
+            // 4. 업로드된 파일의 URL 생성
+            const baseUrl = 'https://image.themoonha.site/';
+            const updatedVideoUrls = videoFileNames.map((fileName) => `${baseUrl}${fileName}`);
+            const updatedThumbnailUrls = thumbnailFileNames.map((fileName) => `${baseUrl}${fileName}`);
+
             // 서버로 데이터 전송
             const prologueRegister = {
                 name: themeName,
@@ -72,14 +141,16 @@ const PrologueRegister = () => {
                 startDate: selectedDateRange ? selectedDateRange[0].format('YYYY-MM-DD') : null,
                 expireDate: selectedDateRange ? selectedDateRange[1].format('YYYY-MM-DD') : null,
                 prologueList: titleList,
+                thumbnailList: updatedThumbnailUrls,
+                videoList: updatedVideoUrls,
             };
 
             try {
                 // API 호출
                 console.info('lessonRegister : {}', prologueRegister);
-                console.log('thumbnailFile : {}', thumbnailList);
-                console.log('videoFile : {}', videoList);
-                const response = await prologueRegisterAPI(prologueRegister, thumbnailList, videoList);
+                // const response = await prologueRegisterAPI(prologueRegister, thumbnailList, videoList);
+
+                const response = await prologueRegisterAPIV2(prologueRegister);
 
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
@@ -183,9 +254,24 @@ const RegisterModal = ({ setOpen, setConfirmLoading, confirmLoading, onUpdate })
 
     const handleOk = () => {
         setConfirmLoading(true);
+        // 파일 이름을 getFileNameServer 함수로 변경
+        const thumbnailFileName = thumbnailFile ? getFileNameServer('craft', thumbnailFile.name) : null;
+        const videoFileName = videoFile ? getFileNameServer('craft', videoFile.name) : null;
+
+        console.log('thumbnailFileName : ', thumbnailFileName);
+        console.log('videoFileName : ', videoFileName);
+
+        // 새로운 파일 객체 생성
+        const renamedThumbnailFile = thumbnailFile
+            ? new File([thumbnailFile], thumbnailFileName, { type: thumbnailFile.type })
+            : null;
+        const renamedVideoFile = videoFile ? new File([videoFile], videoFileName, { type: videoFile.type }) : null;
+
+        console.log('renamedThumbnailFile : ', renamedThumbnailFile);
+        console.log('renamedVideoFile : ', renamedVideoFile);
         setTimeout(() => {
             if (onUpdate) {
-                onUpdate(prologueName, thumbnailFile, videoFile);
+                onUpdate(prologueName, renamedThumbnailFile, renamedVideoFile);
             }
             setOpen(false);
             setConfirmLoading(false);

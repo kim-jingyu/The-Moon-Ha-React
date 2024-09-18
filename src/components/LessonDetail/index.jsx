@@ -146,7 +146,7 @@ const LessonDetail = ({ record, lessonId }) => {
                                         type="radio"
                                         name="target"
                                         value={idx}
-                                        checked={detail?.target === idx}
+                                        checked={detail?.target - 1 === idx}
                                         onChange={() => {}}
                                     />
                                     {item}

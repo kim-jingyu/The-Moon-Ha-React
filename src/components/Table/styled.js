@@ -3,7 +3,9 @@ import { colors } from '../../styles/colors';
 import { Table } from 'antd';
 
 export const StyleTable = styled(Table)`
+
     .ant-table {
+        table-layout: fixed;
         width: 100% !important; /* 부모의 너비에 맞게 조정 */
     }
     .ant-table-container {
@@ -16,6 +18,10 @@ export const StyleTable = styled(Table)`
         background: ${colors.white}; /* 배경색 */
         border-bottom: 1px solid ${colors.gray}; /* 하단 테두리 */
         transition: background 0.2s ease; /* 배경색 전환 */
+        padding: 10px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; 
     }
 
     /* hover 시 배경색 제거 */
@@ -25,6 +31,10 @@ export const StyleTable = styled(Table)`
         
     .ant-table-tbody > tr > td {
         border-bottom: none; /* 바디 셀 하단 테두리 제거 */
+        padding: 10px !important; /* 바디 셀에 패딩 추가 */
+        white-space: normal; /* 텍스트가 줄바꿈되지 않게 */
+        overflow: hidden; /* 넘치는 내용 숨김 */
+        text-overflow: ellipsis; /* 넘치는 텍스트는 ...으로 표시 */
     }
 
     /* hover 시 색상 변경 방지 */
@@ -44,6 +54,6 @@ export const StyleTable = styled(Table)`
     .ant-table-wrapper .ant-table-tbody > tr > td,
     .ant-table-wrapper tfoot > tr > th,
     .ant-table-wrapper tfoot > tr > td {
-        padding: 0 !important;
+        padding: 10px !important;
     }
 `;

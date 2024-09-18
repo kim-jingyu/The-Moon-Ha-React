@@ -15,6 +15,7 @@ import {
     RadioLabel,
     UploadWrapper,
     UploadItem,
+    TextAreaField,
 } from './styled';
 import { StyledButton } from '../Button/styled';
 import TimePicker from '../TimePicker';
@@ -23,6 +24,7 @@ import { DropdownWithGroup, branchItem } from '../DropdownWithGroup';
 import { category_center, category_ch1985, Dropdown } from '../Dropdown';
 import { LessonRegisterAPI } from '../../apis/Lesson';
 import FileUpload from '../Upload';
+import dayjs from 'dayjs';
 
 const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
 const target = ['성인', '엄마랑 아이랑', '유아/어린이', '패밀리'];
@@ -80,26 +82,35 @@ const LessonRegister = () => {
     };
 
     const handleSubmit = async () => {
+        console.log('handleSubmit : ', target.indexOf(selectedTarget));
+
         if (!isDisabled) {
+            const startDate = dayjs(selectedDateRange[0]);
+            const endDate = dayjs(selectedDateRange[1]);
+
+            const diffInDays = endDate.diff(startDate, 'day');
+            const weeks = Math.floor(diffInDays / 7);
+            console.log('weeks : ', weeks);
+
             // 서버로 데이터 전송
             const lessonRegister = {
                 branchId: selectedBranch?.index || null,
-                categoryId: 1,
-                memberId: 2,
+                categoryId: selectedCategory?.index || null,
+                memberId: 18,
                 title: lessonName,
                 startDate: selectedDateRange ? selectedDateRange[0].format('YYYY-MM-DD') : null,
                 endDate: selectedDateRange ? selectedDateRange[1].format('YYYY-MM-DD') : null,
                 startTime: selectedTimeRange ? selectedTimeRange[0].format('HH:mm') : null,
                 endTime: selectedTimeRange ? selectedTimeRange[1].format('HH:mm') : null,
                 summary: summary,
-                cnt: 0,
+                cnt: weeks,
                 cost: lessonFee,
                 curriculum: curriculum,
                 supply: supply,
                 place: place,
                 day: selectedWeekDay,
-                target: 1,
-                onlineCost: isRealTime ? lessonFee * 0.8 : 0,
+                target: target.indexOf(selectedTarget) + 1,
+                onlineCost: isRealTime ? lessonFee * 0.5 : 0,
             };
 
             try {
@@ -136,12 +147,10 @@ const LessonRegister = () => {
             place !== '' &&
             selectedWeekDay !== '' &&
             selectedTarget !== '' &&
-            lessonFee !== 0 &&
             summary !== '' &&
             selectedDateRange !== null &&
             selectedTimeRange !== null &&
             thumbnailFile !== null &&
-            videoFile !== null &&
             curriculum.length > 0 // 배열의 길이가 0이 아닌지 확인
         ) {
             console.log('활성화!!~');
@@ -157,13 +166,11 @@ const LessonRegister = () => {
         place,
         selectedWeekDay,
         selectedTarget,
-        lessonFee,
         summary,
         supply,
         selectedDateRange,
         selectedTimeRange,
         thumbnailFile,
-        videoFile,
         curriculum,
     ]);
 
@@ -235,7 +242,6 @@ const LessonRegister = () => {
                         <HintTitle>강좌명</HintTitle>
                         <InputField
                             type="text"
-                            // placeholder="강좌명"
                             width="430px"
                             value={lessonName}
                             onChange={(e) => setLessonName(e.target.value)}
@@ -257,7 +263,6 @@ const LessonRegister = () => {
                         <HintTitle>장소</HintTitle>
                         <InputField
                             type="text"
-                            // placeholder="장소"
                             width="300px"
                             value={place}
                             onChange={(e) => setPlace(e.target.value)}
@@ -331,7 +336,6 @@ const LessonRegister = () => {
                         <InputField
                             type="text"
                             width="450px"
-                            // placeholder="개요"
                             value={summary}
                             onChange={(e) => setSummary(e.target.value)}
                         />
@@ -341,7 +345,6 @@ const LessonRegister = () => {
                         <InputField
                             type="text"
                             width="220px"
-                            // placeholder="준비물"
                             value={supply}
                             onChange={(e) => setSupply(e.target.value)}
                         />
@@ -350,11 +353,9 @@ const LessonRegister = () => {
                 <RowWrapper>
                     <RowItem>
                         <HintTitle>커리큘럼</HintTitle>
-                        <InputField
-                            type="text"
-                            // placeholder="커리큘럼"
+                        <TextAreaField
                             width="745px"
-                            height="90px"
+                            height="150px"
                             value={curriculum}
                             onChange={(e) => setCurriculumName(e.target.value)}
                         />

@@ -20,6 +20,13 @@ export const prologueRegisterAPI = (prologueRegister, thumbnailFileList, videoFi
     });
 };
 
+export const prologueRegisterAPIV2 = (prologueRegister) => {
+    const formData = new FormData();
+    formData.append('registerRequest', new Blob([JSON.stringify(prologueRegister)], { type: 'application/json' }));
+
+    return instance.post('/admin/craft/prologue/register/v2', formData);
+};
+
 export const fetchPrologueThemeListAPI = () => {
     return instance.get('/admin/craft/prologue/theme/list');
 };

@@ -79,6 +79,20 @@ export const InputField = styled.input`
     font-weight: 400; /* Bold */
 `;
 
+export const TextAreaField = styled.textarea`
+    width: ${(props) => props.width || '200px'};
+    height: ${(props) => props.height || '35px'};
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid ${colors.gray};
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'Happiness-Sans', sans-serif;
+    font-weight: 400;
+    resize: none;
+    overflow-y: auto;
+`;
+
 // CheckBox 컨테이너
 export const CheckBoxContainer = styled.div`
     display: flex;
