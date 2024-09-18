@@ -11,15 +11,15 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
     display: flex;
+    width: 1145px;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
-    // gap: 22px;
     height: auto;
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 400; /* Bold */
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: ${colors.white};
+    background-color: ${colors.drak_gray};
 `;

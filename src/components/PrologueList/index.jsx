@@ -93,7 +93,7 @@ const columns = [
         title: '기간',
         dataIndex: 'period',
         key: 'period',
-        width: '210px',
+        width: '150px',
     },
     {
         title: '상태',
