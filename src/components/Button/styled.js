@@ -116,6 +116,23 @@ const buttonStyles = {
             opacity: 0.5;
         }
     `,
+    contentDeleteBtn: css`
+        display: flex;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+        background-image: ${({ icon }) => (icon ? `url(${icon})` : 'none')};
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 25px;
+        background-color: transparent;
+        border: 1px solid ${colors.gray};
+        border-radius: 20%;
+    `,
 };
 
 export const StyledButton = styled.button`

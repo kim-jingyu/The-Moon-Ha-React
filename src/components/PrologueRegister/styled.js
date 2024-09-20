@@ -6,7 +6,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1100px;
+    width: 100%;
     height: auto;
 `;
 
@@ -15,9 +15,8 @@ export const ModalContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 540px;
+    gap: 22px;
     height: auto;
-    // margin: 10px;
-    // background-color: ${colors.main_green};
 `;
 
 export const Wrapper = styled.div`
@@ -26,13 +25,12 @@ export const Wrapper = styled.div`
     flex-direction: column;
     margin-bottom: 30px;
     gap: 22px;
-    // background-color: ${colors.main_green};
 `;
 
 export const BodyWrapper = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: row;
-    justify-content: space-between;
     padding: 22px;
     gap: 22px;
     height: auto;
@@ -44,34 +42,23 @@ export const BodyWrapper = styled.div`
     background-color: ${colors.white};
 `;
 
-export const AddWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
-    height: auto;
-    box-sizing: border-box;
-    font-family: 'Happiness-Sans', sans-serif;
-    background-color: ${colors.white};
-    font-weight: 400; /* Bold */
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-export const ContentWrapper = styled.div`
+export const ColumnWrapper = styled.div`
+    flex-basis: ${(props) => props.width || '100%'};
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 10px;
 `;
 
 export const RowItem = styled.div`
-    width: auto;
-    align-items: center;
+    width: 100%;
     display: flex;
+    align-items: center;
     flex-direction: row;
+    justify-content: flex-end;
 `;
 
-export const ModalItem = styled.div`
+export const RowNoCenterItem = styled.div`
     width: auto;
     display: flex;
     flex-direction: row;
@@ -86,14 +73,13 @@ export const ModalP = styled.div`
     color: ${colors.black};
 `;
 
-export const BodyWrapperTitle = styled.div`
+export const WrapperTitle = styled.div`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
     font-size: 18px;
     width: auto;
     align-items: center;
     color: ${colors.black};
-    // background-color: ${colors.drak_gray};
 `;
 
 export const HintTitle = styled.p`
@@ -106,7 +92,7 @@ export const HintTitle = styled.p`
 `;
 
 export const InputField = styled.input`
-    width: ${(props) => props.width || '200px'};
+    width: ${(props) => props.width || '100%'};
     height: ${(props) => props.height || '35px'};
     box-sizing: border-box;
     padding: 10px;

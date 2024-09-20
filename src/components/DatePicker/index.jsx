@@ -27,7 +27,13 @@ const DatePicker = ({ onChange, width, value, disabled = false }) => {
             }}
         >
             <Space direction="vertical" size={12}>
-                <StyledRangePicker onChange={handleDateChange} value={dates} format="YYYY-MM-DD" disabled={disabled} />
+                <StyledRangePicker
+                    onChange={handleDateChange}
+                    value={dates}
+                    format="YYYY-MM-DD"
+                    disabled={disabled}
+                    placement="bottomRight"
+                />
             </Space>
         </ConfigProvider>
     );

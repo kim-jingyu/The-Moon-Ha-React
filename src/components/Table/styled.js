@@ -3,10 +3,11 @@ import { colors } from '../../styles/colors';
 import { Table } from 'antd';
 
 export const StyleTable = styled(Table)`
+ width: 100% !important;
 
     .ant-table {
         table-layout: fixed;
-        width: 100% !important; /* 부모의 너비에 맞게 조정 */
+        // width: 100% !important; /* 부모의 너비에 맞게 조정 */
     }
     .ant-table-container {
         overflow: auto; /* 내용이 많을 경우 스크롤 가능하게 설정 */
