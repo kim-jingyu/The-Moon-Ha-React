@@ -46,7 +46,8 @@ const Header = () => {
                     </Button>
                 ) : (
                     <>
-                        <StyledLink to="/login">LOGIN</StyledLink>/<StyledLink to="/signup">SIGNUP</StyledLink>
+                        <StyledLink to="/login">LOGIN</StyledLink>
+                        {/* /<StyledLink to="/signup">SIGNUP</StyledLink> */}
                     </>
                 )}
             </RightWrapper>
