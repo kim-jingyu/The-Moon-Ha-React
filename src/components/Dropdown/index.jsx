@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DropdownButton, DropdownContainer, DropdownItem, DropdownMenu, IconWrapper } from './styled';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelectedItem, disabled = false }) => {
+export const Dropdown = ({ title, width, group = [], onSelect, selectedItem, setSelectedItem, disabled = false }) => {
     const [showMenu, setShowMenu] = useState(false);
     // const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
@@ -41,15 +41,15 @@ export const Dropdown = ({ title, group = [], onSelect, selectedItem, setSelecte
     }, [selectedItem]);
 
     return (
-        <DropdownContainer ref={dropdownRef}>
-            <DropdownButton onClick={toggleMenu} disabled={disabled}>
+        <DropdownContainer ref={dropdownRef} width={width}>
+            <DropdownButton onClick={toggleMenu} disabled={disabled} width={width}>
                 {selectedItem ? selectedItem.name : title}
                 <IconWrapper>
                     <MdKeyboardArrowDown size={20} />
                 </IconWrapper>
             </DropdownButton>
             {!disabled && (
-                <DropdownMenu show={showMenu}>
+                <DropdownMenu show={showMenu} width={width}>
                     {group.map((item) => (
                         <DropdownItem key={item.index} onClick={() => handleItemClick(item)}>
                             {item.name}

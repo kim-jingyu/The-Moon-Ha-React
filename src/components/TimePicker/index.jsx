@@ -3,7 +3,7 @@ import { StyledRangePicker } from './styled';
 import { ConfigProvider } from 'antd';
 import { colors } from '../../styles/colors';
 
-const TimePicker = ({ onChange, value, disabled = false }) => {
+const TimePicker = ({ width, onChange, value, disabled = false }) => {
     const [times, setTimes] = useState(value || [null, null]);
 
     useEffect(() => {
@@ -27,6 +27,7 @@ const TimePicker = ({ onChange, value, disabled = false }) => {
             }}
         >
             <StyledRangePicker
+                width={width}
                 format="HH:mm" // 시:분 형식으로 설정
                 use12Hours={false} // 12시간 형식 사용 안 함
                 showNow={false} // 현재 시간 버튼 비활성화

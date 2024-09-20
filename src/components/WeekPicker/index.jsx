@@ -1,6 +1,7 @@
 import React from 'react';
-import { ConfigProvider, DatePicker, Space } from 'antd';
+import { ConfigProvider } from 'antd';
 import { colors } from '../../styles/colors';
+import { CustomDatePicker, CustomSpace } from './styled';
 
 const WeekPicker = ({ onChange, width }) => {
     const handleWeekChange = (week, weekString) => {
@@ -23,9 +24,9 @@ const WeekPicker = ({ onChange, width }) => {
                 },
             }}
         >
-            <Space direction="vertical">
-                <DatePicker onChange={handleWeekChange} picker="week" />
-            </Space>
+            <CustomSpace direction="vertical" width={width}>
+                <CustomDatePicker onChange={handleWeekChange} picker="week" width={width} placement="bottomRight" />
+            </CustomSpace>
         </ConfigProvider>
     );
 };

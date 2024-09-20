@@ -4,7 +4,7 @@ import '../../styles/font.css';
 
 export const FileUploadContainer = styled.div`
     display: flex;
-    width: ${(props) => props.width};
+    width: ${(props) => props.width || '100%'};
     align-items: center;
     justify-content: center;
     box-sizing: board-box;

@@ -33,4 +33,5 @@ export const BodyWrapper = styled.div`
     height: auto;
     box-sizing: border-box;
     margin-top: 22px;
+    background-color: ${colors.drak_gray};
 `;

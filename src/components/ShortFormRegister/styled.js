@@ -5,45 +5,38 @@ import '../../styles/font.css';
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
-    // width: 900px;
+    width: 100%;
     height: auto;
-    margin-bottom: 22px;
     padding: 22px;
+    gap: 22px;
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
-    background-color: ${colors.white};
-    font-weight: 400; /* Bold */
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: ${colors.main_green};
 `;
 
 export const BodyWrapper = styled.div`
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    // justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
     align-items: center;
-    margin-left: 22px;
-    // background-color: ${colors.main_green};
 `;
 
 export const ContentWrapper = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column;
     margin-bottom: 40px;
-    // background-color: ${colors.main_green};
 `;
 
 export const RowItem = styled.div`
     display: flex;
     gap: 15px;
-    width: auto;
+    width: 100%;
     align-items: center;
     flex-direction: row;
 `;
 
 export const ContentItem = styled.div`
-    // background-color: ${colors.drak_gray};
     display: flex;
     gap: 15px;
     width: 100%;
@@ -51,6 +44,9 @@ export const ContentItem = styled.div`
     margin-bottom: 22px;
     padding: 22px;
     height: auto;
+    align-item: center;
+    justify-content: center;
+    background-color: ${colors.white};
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 400; /* Bold */
@@ -59,15 +55,16 @@ export const ContentItem = styled.div`
 `;
 
 export const HintTitle = styled.p`
+    white-space: nowrap;
+    box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
-    font-size: 12px;
-    width: auto;
+    font-size: 15px;
     color: ${colors.black};
 `;
 
 export const InputField = styled.input`
-    width: ${(props) => props.width || '200px'};
+    width: ${(props) => props.width || '100%'};
     height: ${(props) => props.height || '35px'};
     box-sizing: border-box;
     padding: 10px;
