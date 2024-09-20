@@ -150,7 +150,7 @@ const ShortFormRegister = () => {
                         <RowItem>
                             <DropdownWithGroup
                                 title="지점 선택"
-                                width="90%"
+                                width="200px"
                                 groups={branchItem}
                                 onSelect={setSelectedBranch}
                                 selectedItem={selectedBranch}
