@@ -3,6 +3,7 @@ import { Container, Wrapper } from './styled';
 import CustomTable from '../Table';
 import { fetchPrologueListAPI } from '../../apis/Craft';
 import Player from '../Player';
+import { render } from 'less';
 
 const PrologueDetail = ({ prologueThemeId }) => {
     const [prologueList, setPrologueList] = useState([]);
@@ -10,7 +11,6 @@ const PrologueDetail = ({ prologueThemeId }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log('prologueThemeId : ', prologueThemeId);
         // 데이터를 가져오는 함수
         const getPrologueList = async () => {
             try {
@@ -44,25 +44,28 @@ const columns = [
         title: '영상',
         dataIndex: 'videoUrl',
         key: 'videoUrl',
-        width: '20px',
+        width: '30%',
         render: (text, record) => <Player url={record.videoUrl} thumbnail={record.thumbnailUrl} />,
     },
     {
         title: '제목',
         dataIndex: 'title',
         key: 'title',
-        width: '230px',
+        width: '40%',
     },
     {
         title: '최종 업데이트',
         dataIndex: 'latestUpdateDate',
         key: 'latestDate',
-        width: '120px',
+        width: '20%',
     },
     {
         title: '좋아요 수',
         dataIndex: 'likeCnt',
         key: 'likeCnt',
-        width: '100px',
+        width: '10%',
+        render: (text, record) => (
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '22px' }}> {text}</div>
+        ),
     },
 ];

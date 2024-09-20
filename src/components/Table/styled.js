@@ -57,4 +57,9 @@ export const StyleTable = styled(Table)`
     .ant-table-wrapper tfoot > tr > td {
         padding: 10px !important;
     }
+
+     /* 커서: pointer 스타일 적용 */
+    .navigable-row {
+        cursor: pointer;
+    }
 `;

@@ -25,8 +25,10 @@ const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick, pagin
                     ),
                 }}
                 onRow={(record) => {
+                    const isNavigable = shouldNavigate && shouldNavigate(record);
                     return {
                         onClick: () => handleClick(record), // 행 클릭 시 호출
+                        className: isNavigable ? 'navigable-row' : '', // 조건에 따라 className 추가
                     };
                 }}
             />
