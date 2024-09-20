@@ -6,16 +6,15 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 860px;
+    width: 80%;
     height: auto;
 `;
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    // margin-top: 22px;
     margin-bottom: 22px;
-    gap: 5px;
+    gap: 10px;
     padding: 22px;
     width: 100%;
     height: auto;
@@ -30,9 +29,7 @@ export const Wrapper = styled.div`
 export const RowWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin: 5px;
-    // background-color: ${colors.main_green};
+    gap: 22px;
 `;
 
 export const UploadWrapper = styled.div`
@@ -40,20 +37,21 @@ export const UploadWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin: 5px;
-    gap: 5px;
-    // background-color: ${colors.main_green};
+    gap: 22px;
 `;
 
 export const RowItem = styled.div`
-    gap: 15px;
-    width: auto;
+    gap: 5px;
+    width: 100%;
     align-items: center;
     display: flex;
     flex-direction: row;
 `;
 
 export const UploadItem = styled.div`
+    width: 100%;
     gap: 5px;
+    align-item: center;
     display: flex;
     flex-direction: column;
 `;
@@ -62,8 +60,9 @@ export const HintTitle = styled.p`
     font-family: 'Happiness-Sans', sans-serif;
     font-weight: 800; /* Bold */
     font-size: 12px;
-    width: auto;
+    width: 60px;
     align-items: center;
+    white-space: nowrap;
     color: ${colors.black};
 `;
 
@@ -80,8 +79,8 @@ export const InputField = styled.input`
 `;
 
 export const TextAreaField = styled.textarea`
-    width: ${(props) => props.width || '200px'};
-    height: ${(props) => props.height || '35px'};
+    width: 100%;
+    height: 100px;
     box-sizing: border-box;
     padding: 10px;
     border: 1px solid ${colors.gray};

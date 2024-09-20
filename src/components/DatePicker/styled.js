@@ -5,10 +5,10 @@ import { DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
 export const StyledRangePicker = styled(RangePicker)`
+    height: 35px;
     .ant-picker-input {
         border-color: ${colors.gray};
         input {
-            height: 30px;
             width: 130px;
             font-size: 12px;
             border-radius: 10px;
