@@ -68,12 +68,12 @@ const LiveBroadcastComponent = () => {
     e.preventDefault();
     if (status) {
       try {
+        await status.leave();
         await LiveLessonEndAPI(liveId);
         setOnAir(false);
       } catch (err) {
         setError('방송 종료 실패: ' + (err.response?.data?.message || err.message));
       }
-      status.leave();
     }
   };
   return (
