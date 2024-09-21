@@ -14,6 +14,7 @@ import {
     UploadItem,
     VideoWrapper,
     CheckBox,
+    TextAreaField,
 } from './styled';
 import CustomImage from '../Image';
 import { fetchLessonDetailAPI } from '../../apis/Lesson';
@@ -81,6 +82,7 @@ const LessonDetail = ({ record, lessonId }) => {
                         {/* 지점 선택 드롭다운 */}
                         <DropdownWithGroup
                             title="지점명"
+                            width="200px"
                             onSelect={() => {}}
                             selectedItem={{ index: detail?.branchId, name: detail?.branchName }}
                             disabled={true}
@@ -110,7 +112,7 @@ const LessonDetail = ({ record, lessonId }) => {
                         <HintTitle>강좌명</HintTitle>
                         <InputField
                             type="text"
-                            width="430px"
+                            width="450px"
                             value={detail?.title || ''}
                             placeholder={detail?.title || '강좌명'}
                             readOnly
@@ -190,7 +192,7 @@ const LessonDetail = ({ record, lessonId }) => {
                         <HintTitle>수강료</HintTitle>
                         <InputField
                             type="text"
-                            width="220px"
+                            width="100%"
                             value={detail?.cost || ''}
                             placeholder={detail?.cost || '수강료'}
                             readOnly
@@ -214,7 +216,7 @@ const LessonDetail = ({ record, lessonId }) => {
                         <HintTitle>준비물</HintTitle>
                         <InputField
                             type="text"
-                            width="220px"
+                            width="100%"
                             value={detail?.supply || ''}
                             placeholder={detail?.supply || '준비물'}
                             readOnly
@@ -224,10 +226,8 @@ const LessonDetail = ({ record, lessonId }) => {
                 <RowWrapper>
                     <RowItem>
                         <HintTitle>커리큘럼</HintTitle>
-                        <InputField
-                            type="text"
-                            width="745px"
-                            height="90px"
+                        <TextAreaField
+                            height="150px"
                             value={detail?.curriculum || ''}
                             placeholder={detail?.curriculum || '준비물'}
                             readOnly
@@ -244,7 +244,7 @@ const LessonDetail = ({ record, lessonId }) => {
                     </UploadItem>
                     <UploadItem>
                         <HintTitle>프리뷰 영상</HintTitle>
-                        <Player url={detail?.previewVideoUrl} thumbnail={detail?.thumbnailUrl} width="380px" />
+                        <Player url={detail?.previewVideoUrl} width="380px" />
                     </UploadItem>
                 </VideoWrapper>
             </Wrapper>

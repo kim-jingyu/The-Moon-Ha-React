@@ -9,7 +9,6 @@ import {
     VideoGrid,
     Wrapper,
 } from './styled';
-import CustomTable from '../Table';
 import { useNavigate } from 'react-router';
 import { fetchShortFormAPI } from '../../apis/Lesson';
 import Player from '../Player';
@@ -19,7 +18,6 @@ import CalendarHeader from '../CalendarHeader';
 import { addMonths, format, subMonths } from 'date-fns';
 
 const ShortFormList = () => {
-    const navigate = useNavigate();
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [shortFormList, setShortFormList] = useState([]);
 
@@ -64,6 +62,7 @@ const ShortFormList = () => {
                     <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
                     <DropdownWithGroup
                         title="지점명"
+                        width="200px"
                         groups={branchItem}
                         onSelect={setSelectedBranch}
                         selectedItem={selectedBranch}

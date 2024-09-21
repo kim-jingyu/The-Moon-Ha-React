@@ -125,22 +125,24 @@ const ShortFormRegister = () => {
 
     return (
         <Container>
-            <RowItem>
-                <FileUpload
-                    onChange={handleThumbnailFileChange}
-                    id="image"
-                    width="280px"
-                    ratio="9/16"
-                    placeholder="썸네일 업로드"
-                />
-                <FileUpload
-                    onChange={handleShortFormFileChange}
-                    id="video"
-                    width="280px"
-                    ratio="9/16"
-                    placeholder="영상 업로드"
-                />
-            </RowItem>
+            <BodyWrapper>
+                <ContentItem>
+                    <RowItem>
+                        <FileUpload
+                            onChange={handleThumbnailFileChange}
+                            id="image"
+                            ratio="9/16"
+                            placeholder="썸네일 업로드"
+                        />
+                        <FileUpload
+                            onChange={handleShortFormFileChange}
+                            id="video"
+                            ratio="9/16"
+                            placeholder="영상 업로드"
+                        />
+                    </RowItem>
+                </ContentItem>
+            </BodyWrapper>
             <BodyWrapper>
                 <ContentWrapper>
                     <HintTitle>강좌 선택</HintTitle>
@@ -148,26 +150,26 @@ const ShortFormRegister = () => {
                         <RowItem>
                             <DropdownWithGroup
                                 title="지점 선택"
+                                width="200px"
                                 groups={branchItem}
                                 onSelect={setSelectedBranch}
                                 selectedItem={selectedBranch}
                                 setSelectedItem={setSelectedBranch}
                             />
-                            <InputField
-                                type="text"
-                                placeholder="숏폼 제목"
-                                width="240px"
-                                value={shortFormName}
-                                onChange={(e) => setShortFormName(e.target.value)}
-                            />
-                        </RowItem>
-                        <RowItem>
                             <Dropdown
                                 title={dropDownTitle}
                                 group={lessonDropDown}
                                 onSelect={setLesson}
                                 selectedItem={lesson}
                                 setSelectedItem={setLesson}
+                            />
+                        </RowItem>
+                        <RowItem>
+                            <InputField
+                                type="text"
+                                placeholder="숏폼 제목"
+                                value={shortFormName}
+                                onChange={(e) => setShortFormName(e.target.value)}
                             />
                         </RowItem>
                     </ContentItem>
@@ -178,10 +180,10 @@ const ShortFormRegister = () => {
                             <WeekPicker onChange={handleWeekChange} />
                         </RowItem>
                     </ContentItem>
+                    <StyledButton variant="registerBtn" onClick={handleSubmit} disabled={isDisabled}>
+                        예약하기
+                    </StyledButton>
                 </ContentWrapper>
-                <StyledButton variant="registerBtn" onClick={handleSubmit} disabled={isDisabled}>
-                    예약하기
-                </StyledButton>
             </BodyWrapper>
         </Container>
     );

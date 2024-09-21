@@ -12,6 +12,8 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export const DropdownWithGroup = ({
     title = '',
+    flex,
+    width,
     groups = [],
     onSelect,
     selectedItem,
@@ -54,15 +56,15 @@ export const DropdownWithGroup = ({
     }, []);
 
     return (
-        <DropdownContainer ref={dropdownRef}>
-            <DropdownButton onClick={toggleMenu} disabled={disabled}>
+        <DropdownContainer ref={dropdownRef} width={width}>
+            <DropdownButton onClick={toggleMenu} disabled={disabled} width={width}>
                 {selectedItem ? selectedItem.name : title}
                 <IconWrapper>
                     <MdKeyboardArrowDown size={20} />
                 </IconWrapper>
             </DropdownButton>
             {!disabled && (
-                <DropdownMenu show={showMenu}>
+                <DropdownMenu show={showMenu} width={width}>
                     {groups.map((group, groupIndex) => (
                         <DropdownGroup key={groupIndex} group={group} onSelect={handleItemClick} />
                     ))}

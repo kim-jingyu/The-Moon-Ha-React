@@ -30,7 +30,6 @@ export const BodyWrapper = styled.div`
 `;
 
 export const VideoGrid = styled.div`
-    // background-color: ${colors.main_green};
     display: grid;
     width: 100%;
     grid-template-columns: repeat(4, 1fr);
@@ -43,10 +42,19 @@ export const VideoGrid = styled.div`
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: ${colors.white};
+
+    /* 기본 4열 */
+    grid-template-columns: repeat(4, 1fr);
+
+    /* 화면 크기에 따라 열의 개수를 자동으로 조정 */
+    @media (min-width: 12 00px) {
+        grid-template-columns: repeat(5, 1fr); /
+    }
 `;
 
 export const GridItem = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 10px;

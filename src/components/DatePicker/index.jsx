@@ -3,7 +3,7 @@ import { ConfigProvider, Space } from 'antd';
 import { StyledRangePicker } from './styled';
 import { colors } from '../../styles/colors';
 
-const DatePicker = ({ onChange, width, value, disabled = false }) => {
+const DatePicker = ({ onChange, width, value, disabled = false, placement = 'bottomRight' }) => {
     const [dates, setDates] = useState(value || [null, null]);
 
     useEffect(() => {
@@ -27,7 +27,13 @@ const DatePicker = ({ onChange, width, value, disabled = false }) => {
             }}
         >
             <Space direction="vertical" size={12}>
-                <StyledRangePicker onChange={handleDateChange} value={dates} format="YYYY-MM-DD" disabled={disabled} />
+                <StyledRangePicker
+                    onChange={handleDateChange}
+                    value={dates}
+                    format="YYYY-MM-DD"
+                    disabled={disabled}
+                    placement={placement}
+                />
             </Space>
         </ConfigProvider>
     );

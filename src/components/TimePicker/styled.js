@@ -6,11 +6,11 @@ import { TimePicker } from 'antd';
 const { RangePicker } = TimePicker;
 
 export const StyledRangePicker = styled(RangePicker)`
+    width: ${(props) => props.width || '100%'};
+    height: 35px;
     .ant-picker-input {
         border-color: ${colors.gray};
         input {
-            height: 30px;
-            width: 120px;
             font-size: 12px;
             border-radius: 10px;
             padding: 8px;

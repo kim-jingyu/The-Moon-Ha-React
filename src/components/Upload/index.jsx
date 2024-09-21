@@ -1,17 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { message, Upload, Image, Modal, Button } from 'antd';
-import styled from 'styled-components';
-import { FileUploadContainer, PreviewFile, PreviewImg, ProfileImgInput, ProfileImgLabel } from './styled';
+import { FileUploadContainer, PreviewFile, ProfileImgInput, ProfileImgLabel } from './styled';
 import Player from '../Player';
 
-const FileUpload = ({
-    onChange,
-    id,
-    width = '380px',
-    height = '180px',
-    ratio = '16/9',
-    placeholder = '파일 업로드',
-}) => {
+const FileUpload = ({ onChange, id, width, ratio = '16/9', placeholder = '파일 업로드' }) => {
     const acceptType = id === 'image' ? 'image/*' : id === 'video' ? 'video/*' : '';
 
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -44,7 +35,7 @@ const FileUpload = ({
                     // 영상 미리보기일 경우 Player 컴포넌트 사용
                     <Player url={previewUrl} width={width} />
                 ) : (
-                    <PreviewFile src={previewUrl} alt="미리보기" style={{ width, height }} />
+                    <PreviewFile src={previewUrl} alt="미리보기" style={{ width }} />
                 )
             ) : (
                 <ProfileImgLabel htmlFor={id}>{placeholder}</ProfileImgLabel>

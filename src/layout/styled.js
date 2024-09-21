@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../styles/colors';
 
 export const LayoutContainer = styled.div`
     display: flex;
@@ -15,6 +16,7 @@ export const Center = styled.div`
     height: calc(100vh - 60px);
     left: 240px;
     overflow-y: auto;
+    background-color: ${colors.bg_green};
 `;
 
 export const Content = styled.div`

@@ -2,7 +2,6 @@ import React from 'react';
 
 import '../../styles/font.css';
 import { StyleTable } from './styled';
-import { useNavigate } from 'react-router';
 
 const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick, pagination }) => {
     // 클릭 시 이동할 경로를 설정하는 함수
@@ -20,9 +19,16 @@ const CustomTable = ({ columns, data, hasPage, shouldNavigate, onRowClick, pagin
                 columns={columns}
                 dataSource={data}
                 pagination={hasPage ? { pageSize: pagination } : false}
+                locale={{
+                    emptyText: (
+                        <div style={{ padding: '20px', textAlign: 'center', color: '#888' }}>데이터가 없습니다.</div>
+                    ),
+                }}
                 onRow={(record) => {
+                    const isNavigable = shouldNavigate && shouldNavigate(record);
                     return {
                         onClick: () => handleClick(record), // 행 클릭 시 호출
+                        className: isNavigable ? 'navigable-row' : '', // 조건에 따라 className 추가
                     };
                 }}
             />

@@ -4,12 +4,11 @@ import { colors } from '../../styles/colors';
 export const PlayerWrapper = styled.div`
     position: relative;
     border-radius: 10px;
-    width: ${(props) => props.width || '328px'};
+    width: ${(props) => props.width || '100%'};
     height: ${(props) => props.height || '100%'};
-    // margin: 20px 0 20px;
     z-index: 1;
     aspect-ratio: ${(props) => props.ratio || '16 / 9'};
-    background-color: black;
+    background-color: ${colors.black};
     overflow: hidden;
 
     .player {

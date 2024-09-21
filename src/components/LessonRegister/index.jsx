@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Image } from 'antd';
 import {
     Container,
     HintTitle,
@@ -90,7 +89,6 @@ const LessonRegister = () => {
 
             const diffInDays = endDate.diff(startDate, 'day');
             const weeks = Math.floor(diffInDays / 7);
-            console.log('weeks : ', weeks);
 
             // 서버로 데이터 전송
             const lessonRegister = {
@@ -115,10 +113,8 @@ const LessonRegister = () => {
 
             try {
                 // API 호출
-                console.info('lessonRegister : {}', lessonRegister);
-                console.log('thumbnailFile : {}', thumbnailFile);
-                console.log('videoFile : {}', videoFile);
                 const response = await LessonRegisterAPI(lessonRegister, thumbnailFile, videoFile);
+
                 console.log('응답 : {}', response);
                 if (response.status === 200) {
                     console.log('Success:', response.data);
@@ -153,7 +149,6 @@ const LessonRegister = () => {
             thumbnailFile !== null &&
             curriculum.length > 0 // 배열의 길이가 0이 아닌지 확인
         ) {
-            console.log('활성화!!~');
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
@@ -212,6 +207,7 @@ const LessonRegister = () => {
                         {/* 지점 선택 드롭다운 */}
                         <DropdownWithGroup
                             title="지점명"
+                            width="200px"
                             groups={branchItem}
                             onSelect={setSelectedBranch}
                             selectedItem={selectedBranch}
@@ -242,7 +238,7 @@ const LessonRegister = () => {
                         <HintTitle>강좌명</HintTitle>
                         <InputField
                             type="text"
-                            width="430px"
+                            width="450px"
                             value={lessonName}
                             onChange={(e) => setLessonName(e.target.value)}
                         />
@@ -321,8 +317,7 @@ const LessonRegister = () => {
                         <HintTitle>수강료</HintTitle>
                         <InputField
                             type="text"
-                            // placeholder="수강료"
-                            width="220px"
+                            width="100%"
                             value={lessonFee}
                             onChange={(e) => setLessonFee(e.target.value)}
                         />
@@ -344,7 +339,7 @@ const LessonRegister = () => {
                         <HintTitle>준비물</HintTitle>
                         <InputField
                             type="text"
-                            width="220px"
+                            width="100%"
                             value={supply}
                             onChange={(e) => setSupply(e.target.value)}
                         />
@@ -354,7 +349,6 @@ const LessonRegister = () => {
                     <RowItem>
                         <HintTitle>커리큘럼</HintTitle>
                         <TextAreaField
-                            width="745px"
                             height="150px"
                             value={curriculum}
                             onChange={(e) => setCurriculumName(e.target.value)}

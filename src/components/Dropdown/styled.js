@@ -7,6 +7,7 @@ import { colors } from '../../styles/colors';
 export const DropdownContainer = styled.div`
     position: relative;
     display: inline-block;
+    width: ${(props) => props.width || '100%'};
 `;
 
 export const DropdownGroupContainer = styled.div`
@@ -22,7 +23,7 @@ export const DropdownButton = styled.button`
     background-color: ${colors.white};
     color: ${colors.drak_gray};
     font-weight: 400; /* Bold */
-    width: 220px;
+    width: ${(props) => props.width || '100%'};
     height: 35px;
     box-sizing: border-box;
     border: 1px solid ${colors.gray};
@@ -52,7 +53,7 @@ export const DropdownMenu = styled.div`
     overflow-y: auto; /*스크롤 가능*/
     min-width: 160px;
     font-size: 12px;
-    width: 220px;
+    width: ${(props) => props.width || '100%'};
     z-index: 1;
     flex-direction: column;
 `;

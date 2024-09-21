@@ -3,10 +3,11 @@ import { colors } from '../../styles/colors';
 import { Table } from 'antd';
 
 export const StyleTable = styled(Table)`
+ width: 100% !important;
 
     .ant-table {
         table-layout: fixed;
-        width: 100% !important; /* 부모의 너비에 맞게 조정 */
+        // width: 100% !important; /* 부모의 너비에 맞게 조정 */
     }
     .ant-table-container {
         overflow: auto; /* 내용이 많을 경우 스크롤 가능하게 설정 */
@@ -55,5 +56,10 @@ export const StyleTable = styled(Table)`
     .ant-table-wrapper tfoot > tr > th,
     .ant-table-wrapper tfoot > tr > td {
         padding: 10px !important;
+    }
+
+     /* 커서: pointer 스타일 적용 */
+    .navigable-row {
+        cursor: pointer;
     }
 `;

@@ -37,10 +37,7 @@ const Header = () => {
 
     return (
         <Container>
-            <LeftWrapper>
-                <LogoImage src={logo} />
-                관리자페이지입니다!
-            </LeftWrapper>
+            <LeftWrapper>{/* <LogoImage src={logo} /> */}더 문화적인 하루 관리자</LeftWrapper>
             <RightWrapper>
                 {/* hello! */}
                 {isAuthenticated ? (
@@ -49,7 +46,8 @@ const Header = () => {
                     </Button>
                 ) : (
                     <>
-                        <StyledLink to="/login">LOGIN</StyledLink>/<StyledLink to="/signup">SIGNUP</StyledLink>
+                        <StyledLink to="/login">LOGIN</StyledLink>
+                        {/* /<StyledLink to="/signup">SIGNUP</StyledLink> */}
                     </>
                 )}
             </RightWrapper>

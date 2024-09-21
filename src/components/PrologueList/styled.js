@@ -4,7 +4,6 @@ import { colors } from '../../styles/colors';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    // align-items: center;
     width: 100%;
     height: auto;
 `;
@@ -13,8 +12,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     padding: 10px;
-    // gap: 22px;
     height: auto;
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;

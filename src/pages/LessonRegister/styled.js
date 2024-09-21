@@ -5,10 +5,11 @@ import '../../styles/font.css';
 
 export const Container = styled.div`
     width: 90vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: ${colors.bg_green};
+    background-color: ${colors.bg_green} !important;
 `;
 
 export const TitleWrapper = styled.div`
