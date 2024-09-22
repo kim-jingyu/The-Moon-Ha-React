@@ -81,7 +81,7 @@ const LiveBroadcastComponent = () => {
       <BroadcastWrapper>
         <VideoSection>
           {error ? (
-            <ErrorMessage>{error}</ErrorMessage>
+            <VideoPlaceholder>방송이 종료되었습니다.</VideoPlaceholder>
           ) : onAir ? (
             <VideoInfo ref={display} autoPlay playsInline />
           ) : (
