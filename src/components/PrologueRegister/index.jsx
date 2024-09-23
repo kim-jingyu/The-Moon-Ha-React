@@ -1,3 +1,16 @@
+/**
+ * 프롤로그 등록 페이지
+ * @author 최유경
+ * @since 2024.09.06
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.06  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import deleteBtnIcon from '../../assets/images/contentDeleteBtnIcon.svg';
@@ -7,14 +20,12 @@ import {
     HintTitle,
     InputField,
     RowItem,
-    ContentWrapper,
     Wrapper,
     BodyWrapper,
     ModalP,
     ModalContainer,
     RowNoCenterItem,
     WrapperTitle,
-    RowWrapper,
     ColumnWrapper,
 } from './styled';
 import DatePicker from '../DatePicker';
@@ -46,18 +57,13 @@ const PrologueRegister = () => {
 
     const handleDateChange = (dates, dateStrings) => {
         setSelectedDateRange(dates);
-        console.log('Selected Dates:', dates);
-        console.log('Selected Date Strings:', dateStrings);
     };
 
     const handleAddPrologue = (prologueName, newThumbnail, newVideo) => {
-        console.log('handleAddPrologue 썸네일 : ', newThumbnail);
-        console.log('handleAddPrologue 비디오 : {}', newVideo);
         setThumbnailList([...thumbnailList, newThumbnail]);
         setVideoList([...videoList, newVideo]);
         setTitleList([...titleList, prologueName]);
 
-        console.log('prologueList.length + 1 : ', prologueList.length);
         setPrologueList([
             ...prologueList,
             {
@@ -82,9 +88,6 @@ const PrologueRegister = () => {
             videoFileNames,
             thumbnailFileNames,
         });
-        console.log('videoFileNames : {}', videoFileNames);
-        console.log('thumbnailFileNames : {}', thumbnailFileNames);
-        await new Promise((resolve) => setTimeout(resolve, 0));
 
         setLoading(true);
 
@@ -92,6 +95,10 @@ const PrologueRegister = () => {
             // 1. 비디오 파일 presigned URLs 요청
             const videoResponse = await getPresignedUrlList(videoFileNames);
             const videoPresignedUrls = await videoResponse.data;
+
+            // const videoResponse = await createMultipart(videoFileNames);
+            // const videoUploadIds = await videoResponse.data;
+            // console.log('videoUploadIds : ', videoUploadIds);
 
             // 2. 프롤로그 파일 presigned URLs 요청
             const thumbnailResponse = await getPresignedUrlList(thumbnailFileNames);
@@ -226,18 +233,12 @@ const PrologueRegister = () => {
                     <ColumnWrapper width="70%">
                         <RowItem>
                             <HintTitle>테마명</HintTitle>
-                            <InputField
-                                type="text"
-                                // width="580px"
-                                value={themeName}
-                                onChange={(e) => setThemeName(e.target.value)}
-                            />
+                            <InputField type="text" value={themeName} onChange={(e) => setThemeName(e.target.value)} />
                         </RowItem>
                         <RowItem>
                             <HintTitle>설명</HintTitle>
                             <InputField
                                 type="text"
-                                // width="580px"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />

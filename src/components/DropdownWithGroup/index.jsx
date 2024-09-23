@@ -1,3 +1,17 @@
+/**
+ * dropdown label 존재 컴포넌트
+ *
+ * @author 최유경
+ * @since 2024.09.03
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.03  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
     DropdownButton,
@@ -21,7 +35,6 @@ export const DropdownWithGroup = ({
     disabled = false,
 }) => {
     const [showMenu, setShowMenu] = useState(false);
-    // const [selectedItem, setSelectedItem] = useState(null);
     const dropdownRef = useRef(null);
 
     // 드롭다운 토글

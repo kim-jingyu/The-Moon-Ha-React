@@ -1,3 +1,16 @@
+/**
+ * 강좌 관리 page
+ * @author 최유경
+ * @since 2024.09.04
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.04  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BodyWrapper, Container, TitleWrapper } from './styled';
@@ -9,7 +22,6 @@ import LessonList from '../../components/LessonList';
 const tabItems = ['전체 조회', '과거 내역'];
 
 // 예시 컴포넌트
-const AllView = () => <div>전체 조회 화면</div>;
 const PastRecords = () => <div>과거 내역 화면</div>;
 const AddPage = () => <LessonRegister />;
 

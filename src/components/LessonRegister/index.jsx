@@ -1,3 +1,18 @@
+/**
+ * 강좌 등록 API
+ * @author 최유경
+ * @since 2024.09.05
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.03  	최유경       최초 생성
+ * 2024.09.04   최유경       API 연동
+ * 2024.09.05   최유경       썸네일 등록, dropdown
+ * </pre>
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {

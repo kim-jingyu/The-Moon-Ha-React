@@ -1,4 +1,18 @@
-import React, { useState } from 'react';
+/**
+ * 월별 달력
+ *
+ * @author 최유경
+ * @since 2024.09.05
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.05 	최유경       최초 생성
+ * </pre>
+ */
+
+import React from 'react';
 import { format } from 'date-fns';
 import arrowLeft from '../../assets/images/arrowLeft.svg';
 import arrowRight from '../../assets/images/arrowRight.svg';

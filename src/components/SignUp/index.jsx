@@ -1,17 +1,27 @@
+/**
+ * 회원가입 컴포넌트
+ * @author 최유경
+ * @since 2024.09.09
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.09  	최유경       최초 생성
+ * </pre>
+ */
+
 import React from 'react';
 import { notification } from 'antd';
 import Button from '../Button';
 import { StyledForm, StyledFormItem, StyledInput, StyledPassword } from './styled';
-import { useRecoilState } from 'recoil';
-import { authState } from '../../recoil';
-import { LoginAPI, SignUpAPI } from '../../apis/Auth';
+import { SignUpAPI } from '../../apis/Auth';
 import { useNavigate } from 'react-router';
 
 const CustomSignUp = () => {
     const navigate = useNavigate();
 
     const onFinish = async (values) => {
-        console.log('들어옴?');
         try {
             const signUpRequest = {
                 username: values.username,
@@ -20,9 +30,8 @@ const CustomSignUp = () => {
                 memberRole: 0,
             };
             // 로그인 API 요청
-            console.log('SignUpAPI signUpRequest : ', Request);
             const response = await SignUpAPI(signUpRequest);
-            console.log('SignUpAPI response : ', response);
+
             if (response.data.success) {
                 // 로그인 성공 시 localStorage에 저장
                 localStorage.setItem('signUp success', 'true');

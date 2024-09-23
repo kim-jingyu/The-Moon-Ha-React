@@ -1,3 +1,16 @@
+/**
+ * 숏폼 조회 컴포넌트
+ * @author 최유경
+ * @since 2024.09.12
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.12  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useEffect, useState } from 'react';
 import {
     BodyWrapper,
@@ -9,7 +22,6 @@ import {
     VideoGrid,
     Wrapper,
 } from './styled';
-import { useNavigate } from 'react-router';
 import { fetchShortFormAPI } from '../../apis/Lesson';
 import Player from '../Player';
 import { branchItem, DropdownWithGroup } from '../DropdownWithGroup';
@@ -29,7 +41,7 @@ const ShortFormList = () => {
     const getShortFormList = async () => {
         try {
             setLoading(true);
-            console.log('selectedBranch : ', selectedBranch);
+
             const response = await fetchShortFormAPI(
                 selectedBranch ? selectedBranch.index : null,
                 format(currentMonth, 'yyyy-MM'),

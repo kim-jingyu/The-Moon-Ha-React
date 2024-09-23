@@ -1,6 +1,18 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+/**
+ * dropdown label 존재 컴포넌트
+ *
+ * @author 최유경
+ * @since 2024.09.02
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.02  	최유경       최초 생성
+ * </pre>
+ */
 
+import styled from 'styled-components';
 import '../../styles/font.css';
 import { colors } from '../../styles/colors';
 

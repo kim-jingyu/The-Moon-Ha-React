@@ -1,3 +1,16 @@
+/**
+ * 비디어 player 컴포넌트
+ * @author 최유경
+ * @since 2024.09.09
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.09  	최유경       최초 생성
+ * </pre>
+ */
+
 import { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { PlayerWrapper, ThumbnailWrapper } from './syteld';

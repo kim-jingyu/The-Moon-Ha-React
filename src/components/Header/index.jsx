@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
-import { Container, LeftWrapper, LogoImage, RightWrapper, StyledLink } from './styled';
+/**
+ * header 컴포넌트
+ * @author 최유경
+ * @since 2024.08.26
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.08.26  	최유경       최초 생성
+ * 2024.09.13   최유경       header 상단 고정
+ * </pre>
+ */
+import React from 'react';
+import { Container, LeftWrapper, RightWrapper, StyledLink } from './styled';
 
-import logo from '../../assets/images/logo.svg';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { authState } from '../../recoil';
 import Button from '../Button';
