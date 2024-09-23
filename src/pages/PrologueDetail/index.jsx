@@ -11,9 +11,10 @@
  * </pre>
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BodyWrapper, Container, TitleWrapper } from './styled';
-import useParams from 'react-router';
+import { StyledButton } from '../../components/Button/styled';
+import { useNavigate, useParams } from 'react-router';
 import PrologueDetail from '../../components/PrologueDetail';
 
 const PrologueDetailPage = () => {

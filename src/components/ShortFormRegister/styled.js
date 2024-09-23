@@ -11,7 +11,7 @@ export const Container = styled.div`
     gap: 22px;
     box-sizing: border-box;
     font-family: 'Happiness-Sans', sans-serif;
-    background-color: ${colors.main_green};
+    // background-color: ${colors.main_green};
 `;
 
 export const BodyWrapper = styled.div`

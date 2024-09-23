@@ -15,7 +15,7 @@ import React from 'react';
 import { notification } from 'antd';
 import Button from '../Button';
 import { StyledForm, StyledFormItem, StyledInput, StyledPassword } from './styled';
-import SignUpAPI from '../../apis/Auth';
+import { SignUpAPI } from '../../apis/Auth';
 import { useNavigate } from 'react-router';
 
 const CustomSignUp = () => {

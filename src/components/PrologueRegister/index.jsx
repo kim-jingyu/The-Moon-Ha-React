@@ -37,7 +37,7 @@ import cancelIcon from '../../assets/images/cancelIcon.svg';
 import CustomTable from '../Table';
 import { prologueRegisterAPIV2 } from '../../apis/Craft';
 import { getFileNameServer } from '../../util';
-import { createMultipart, getPresignedUrlList, uploadFileToS3 } from '../../apis/S3';
+import { getPresignedUrlList, uploadFileToS3 } from '../../apis/S3';
 import Player from '../Player';
 import CustomImage from '../Image';
 

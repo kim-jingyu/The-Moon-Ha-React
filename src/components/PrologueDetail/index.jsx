@@ -16,6 +16,7 @@ import { Container, Wrapper } from './styled';
 import CustomTable from '../Table';
 import { fetchPrologueListAPI } from '../../apis/Craft';
 import Player from '../Player';
+import { render } from 'less';
 
 const PrologueDetail = ({ prologueThemeId }) => {
     const [prologueList, setPrologueList] = useState([]);
