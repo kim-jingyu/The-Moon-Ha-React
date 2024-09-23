@@ -1,3 +1,16 @@
+/**
+ * 실시간 강좌 스트리밍 컴포넌트
+ * @author 김진규
+ * @since 2024.09.09
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.09  	김진규       최초 생성
+ * </pre>
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 import { createClient, createMicrophoneAndCameraTracks } from 'agora-rtc-sdk-ng';
 import {
@@ -81,7 +94,7 @@ const LiveBroadcastComponent = () => {
       <BroadcastWrapper>
         <VideoSection>
           {error ? (
-            <VideoPlaceholder>방송이 종료되었습니다.</VideoPlaceholder>
+            <ErrorMessage>방송이 종료되었습니다.</ErrorMessage>
           ) : onAir ? (
             <VideoInfo ref={display} autoPlay playsInline />
           ) : (

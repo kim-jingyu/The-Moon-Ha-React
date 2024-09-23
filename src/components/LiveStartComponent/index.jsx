@@ -1,6 +1,18 @@
+/**
+ * 실시간 강좌 시작 컴포넌트
+ * @author 김진규
+ * @since 2024.09.09
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.09  	김진규       최초 생성
+ * </pre>
+ */
+
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Container, FormWrapper, FormItem, StyledButton, SelectLesson, SelectLessonWrapper, FormItemWithoutWrapper } from './styled';
+import { Container, FormWrapper, FormItem, StyledButton, SelectLesson } from './styled';
 import { useNavigate } from 'react-router-dom';
 import { fetchLessonByTutorAPI } from '../../apis/Lesson';
 import { LiveLessonRegisterAPI } from '../../apis/Live';
