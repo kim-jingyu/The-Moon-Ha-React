@@ -1,10 +1,24 @@
+/**
+ * dropdown 컴포넌트
+ *
+ * @author 최유경
+ * @since 2024.09.02
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.02  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { DropdownButton, DropdownContainer, DropdownItem, DropdownMenu, IconWrapper } from './styled';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export const Dropdown = ({ title, width, group = [], onSelect, selectedItem, setSelectedItem, disabled = false }) => {
     const [showMenu, setShowMenu] = useState(false);
-    // const [selectedItem, setSelectedItem] = useState(null);
+
     const dropdownRef = useRef(null);
 
     const toggleMenu = () => {

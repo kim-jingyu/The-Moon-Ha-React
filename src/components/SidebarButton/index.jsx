@@ -1,5 +1,17 @@
+/**
+ * SidebarButton 컴포넌트
+ * @author 최유경
+ * @since 2024.08.26
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.08.26  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Container, Icon, MainButton, SubMenu, SubMenuLink } from './styled';
 
 const SidebarButton = ({ name, icon, path, subBtn }) => {

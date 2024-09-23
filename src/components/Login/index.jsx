@@ -1,3 +1,16 @@
+/**
+ * 로그인 컴포넌트
+ * @author 최유경
+ * @since 2024.09.09
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.09  	최유경       최초 생성
+ * </pre>
+ */
+
 import React from 'react';
 import { notification } from 'antd';
 import Button from '../Button';
@@ -12,7 +25,6 @@ const CustomLogin = () => {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(authState);
 
     const onFinish = async (values) => {
-        console.log('들어옴?');
         try {
             const loginRequest = {
                 username: values.username,

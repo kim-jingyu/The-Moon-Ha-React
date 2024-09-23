@@ -1,3 +1,16 @@
+/**
+ * 파일 업로드 컴포넌트
+ * @author 최유경
+ * @since 2024.09.04
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.04  	최유경       최초 생성
+ * </pre>
+ */
+
 import React, { useState, useRef } from 'react';
 import { FileUploadContainer, PreviewFile, ProfileImgInput, ProfileImgLabel } from './styled';
 import Player from '../Player';
